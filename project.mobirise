@@ -34,9 +34,16 @@
     "siteFonts": [],
     "favicon": "@PROJECT_PATH@/assets/images/screen-shot-2018-08-13-at-17.32.51-128x129.png",
     "noImageResize": "",
-    "uniqCompNum": 33,
-    "versionPublish": "4.8.10",
-    "screenshot": "screenshot.png"
+    "uniqCompNum": 21,
+    "versionPublish": "4.9.2",
+    "screenshot": "screenshot.png",
+    "robotsText": "User-agent: *\r\nDisallow: /cgi-bin\r\n",
+    "robotsSwitcher": "on",
+    "siteUrl": "https://apb-ldn.org/",
+    "sitemapSwitcherAuto": "on",
+    "sitemapSwitcher": "on",
+    "google-analytics": "",
+    "сanonical-url": ""
   },
   "pages": {
     "index.html": {
@@ -119,6 +126,103 @@
             "& when (@bg-type = 'image')": {
               "background-image": "url(@bg-value)"
             },
+            ".carousel, .slider-box": {
+              "height": "300px"
+            },
+            ".slider-box when (@showTitle), (@showSubtitle)": {
+              "margin-top": "2rem"
+            },
+            ".slider-box when (@showText), (@showButtons)": {
+              "margin-bottom": "2rem"
+            },
+            ".amp-carousel-button": {
+              "width": "50px",
+              "height": "50px",
+              "border-radius": "50%"
+            },
+            "amp-img, img": {
+              "width": "100%",
+              "height": "100%",
+              "object-fit": "cover",
+              "position": "relative"
+            },
+            ".carousel-img": {
+              "width": "100%",
+              "height": "300px",
+              "position": "relative"
+            },
+            "@media (min-width: 768px)": {
+              ".carousel-img": {
+                "max-width": "450px"
+              }
+            },
+            "@media (max-width: 767px)": {
+              ".carousel-img": {
+                "margin": "0"
+              },
+              ".amp-carousel-button": {
+                "display": "none"
+              }
+            },
+            "amp-img:after": {
+              "position": "absolute",
+              "content": "\"\"",
+              "width": "100%",
+              "height": "100%",
+              "left": "0",
+              "top": "0",
+              "background-color": "@imgOverlayColor",
+              "opacity": "0",
+              "pointer-events": "none",
+              "transition": "opacity .3s"
+            },
+            ".icon-wrap": {
+              "width": "~\"@{iconsSize}rem\"",
+              "height": "~\"@{iconsSize}rem\"",
+              "position": "absolute",
+              "left": "50%",
+              "top": "50%",
+              "opacity": "0",
+              "transform": "translate(-50%, -50%)",
+              "pointer-events": "none",
+              "transition": "opacity .3s",
+              ".amp-iconfont": {
+                "font-size": "~\"@{iconsSize}rem\"",
+                "width": "~\"@{iconsSize}rem\"",
+                "color": "contrast(@imgOverlayColor, darken(@imgOverlayColor, 50%), #ffffff, 60%)"
+              }
+            },
+            ".carousel-img:hover": {
+              "amp-img": {
+                "cursor": "pointer",
+                "&:after": {
+                  "opacity": "@imgOverlayOpacity"
+                }
+              },
+              ".icon-wrap": {
+                "opacity": "1"
+              }
+            }
+          },
+          "_name": "slider2",
+          "_customHTML": "<section class=\"slider2 slider\" group=\"Carousels &amp; Sliders\" plugins=\"amp-main,amp-carousel,amp-image-lightbox\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline=\"\" title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        <input type=\"range\" inline=\"\" title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        \n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\">\n        <input type=\"checkbox\" title=\"Show Subtitle\" name=\"showSubtitle\">\n        <input type=\"checkbox\" title=\"Show Text\" name=\"showText\">\n        <input type=\"checkbox\" title=\"show Buttons\" name=\"showButtons\">\n        \n        <input type=\"range\" inline=\"\" title=\"Icons Size\" name=\"iconsSize\" min=\"1\" max=\"3\" step=\"0.1\" value=\"2\">\n        \n        <select title=\"Images\" name=\"imagesAmount\">\n            <option value=\"2\">2</option>\n            <option value=\"3\">3</option>\n            <option value=\"4\" selected=\"\">4</option>\n            <option value=\"5\">5</option>\n            <option value=\"6\">6</option>\n        </select>\n\n        <input type=\"color\" title=\"Image Overlay Color\" name=\"imgOverlayColor\" value=\"#4ea2e3\">\n        <input type=\"range\" inline=\"\" title=\"Image Overlay Opacity\" name=\"imgOverlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.5\">\n\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background6.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected=\"\">\n        </fieldset>\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"container\">\n        <h3 class=\"mbr-fonts-style mbr-section-title mbr-light align-center mbr-white\" mbr-if=\"showTitle\" mbr-theme-style=\"display-2\" data-app-selector=\".mbr-section-title\">Carousel With Lightbox</h3>\n        <h4 class=\"mbr-fonts-style mbr-section-subtitle mbr-light align-center mbr-white\" mbr-if=\"showSubtitle\" mbr-theme-style=\"display-7\" data-app-selector=\".mbr-section-subtitle\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore incidunt molestias, vitae recusandae error ipsam distinctio, ipsum.</h4>\n        <div class=\"slider-box\"><amp-carousel class=\"carousel\" height=\"300\" layout=\"fixed-height\" type=\"carousel\"><div class=\"carousel-img mbr-col-sm-12\">\n                    <amp-img class=\"mobirise-loader\" src=\"@PROJECT_PATH@/assets/images/screenshot-2019-02-12-at-16.12.33-900x710.png\" alt=\"Lawfare 1\" width=\"450\" layout=\"responsive\" height=\"300\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <div placeholder=\"\" class=\"placeholder\"></div>\n                        <a href=\"https://www.lawfareblog.com/avoiding-world-war-web-paris-call-trust-and-security-cyberspace\"><img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/screenshot-2019-02-12-at-16.12.33-900x710.png\" alt=\"Lawfare 1\" title=\"Avoiding A Wolrd War Web - Lawfare\"></a>\n                    </amp-img>\n                    <div class=\"icon-wrap\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <span mbr-icon=\"\" class=\"amp-iconfont mbri-search\"></span>\n                    </div>\n                </div><div class=\"carousel-img mbr-col-sm-12\">\n                    <amp-img class=\"mobirise-loader\" src=\"@PROJECT_PATH@/assets/images/1200px-future-uss-zumwalts-first-underway-at-sea-900x563.jpg\" alt=\"EISS 2018\" width=\"479.57371225577265\" height=\"300\" layout=\"responsive\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                            <div placeholder=\"\" class=\"placeholder\"></div>\n                            <a href=\"http://www.aeges.fr/2018/07/06/european-initiative-on-security-studies-2018-archive/\"><img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/1200px-future-uss-zumwalts-first-underway-at-sea-900x563.jpg\" alt=\"EISS 2018\" title=\"Autonomous Weapons Presentation\"></a>\n                    </amp-img>\n                    <div class=\"icon-wrap\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <span mbr-icon=\"\" class=\"amp-iconfont mbri-search\"></span>\n                    </div>\n                </div><div class=\"carousel-img mbr-col-sm-12\">\n                    <amp-img class=\"mobirise-loader\" src=\"@PROJECT_PATH@/assets/images/retos-de-las-smart-cities-900x509.jpg\" alt=\"Smart Cities &amp; Human Rights Law article\" width=\"530.4518664047151\" height=\"300\" layout=\"responsive\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <div placeholder=\"\" class=\"placeholder\"></div>\n                        <a href=\"https://cyberworld.news/opinion-analysis/big-smart-brother-how-smart-cities-may-redefine-the-right-to-privacy-in-europe/\" target=\"_blank\"><img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/retos-de-las-smart-cities-900x509.jpg\" alt=\"Smart Cities &amp; Human Rights Law article\" title=\"Smart Cities &amp; Human Rights Law article\"></a>\n                    </amp-img>\n                    <div class=\"icon-wrap\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <span mbr-icon=\"\" class=\"amp-iconfont mbri-search\"></span>\n                    </div>\n                </div><div class=\"carousel-img mbr-col-sm-12\">\n                    <amp-img class=\"mobirise-loader\" src=\"@PROJECT_PATH@/assets/images/couv-801-400x576.jpg\" alt=\"Nuclear Proliferation and Neorealism article\" width=\"208.33333333333331\" height=\"300\" layout=\"responsive\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <div placeholder=\"\" class=\"placeholder\"></div>\n                        <a href=\"http://www.defnat.com/e-RDN/vue-article.php?carticle=21481\" target=\"_blank\"><img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/couv-801-400x576.jpg\" alt=\"Nuclear Proliferation and Neorealism article\" title=\"Nuclear Proliferation and Neorealism article\"></a>\n                    </amp-img>\n                    <div class=\"icon-wrap\" on=\"tap:lightbox1\" role=\"button\" tabindex=\"0\">\n                        <span mbr-icon=\"\" class=\"amp-iconfont mbri-search\"></span>\n                    </div>\n                </div></amp-carousel>\n            \n        </div>\n        <p class=\"mbr-text align-center mbr-fonts-style mbr-white\" mbr-if=\"showText\" mbr-theme-style=\"display-7\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae cupiditate rerum ipsum tempora vero. Fugit facilis possimus assumenda ipsa, sapiente eius sunt fuga saepe nemo. Necessitatibus consequuntur, recusandae consequatur suscipit.</p>\n        <div class=\"mbr-section-btn align-center\" mbr-if=\"showButtons\" data-toolbar=\"-mbrBtnMove\" mbr-buttons=\"\" mbr-theme-style=\"display-4\"><a class=\"btn btn-md btn-primary\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Text\">VIEW MORE</a></div>\n    </div>\n    <amp-image-lightbox id=\"lightbox1\" layout=\"nodisplay\">\n        <a class=\"control\" data-close-button-aria-label=\"Close\">\n            <span class=\"close\"></span>\n        </a>\n    </amp-image-lightbox>\n</section>",
+          "_cid": "rhSD2wNAD6",
+          "_anchor": "slider2-k",
+          "_protectedParams": [],
+          "_global": false,
+          "_once": false,
+          "_params": {}
+        },
+        {
+          "_styles": {
+            "padding-top": "(@paddingTop * 15px)",
+            "padding-bottom": "(@paddingBottom * 15px)",
+            "& when (@bg-type = 'color')": {
+              "background-color": "@bg-value"
+            },
+            "& when (@bg-type = 'image')": {
+              "background-image": "url(@bg-value)"
+            },
             ".mbr-title": {
               "padding-bottom": "1rem"
             },
@@ -130,6 +234,65 @@
           "_customHTML": "<section class=\"mbr-section content1\" group=\"Article\" plugins=\"amp-main\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Show Subtitle\" name=\"showSubtitle\">\n        <input type=\"checkbox\" title=\"Show Buttons\" name=\"showButtons\">\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background3.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"mbr-container\">\n        <h2 mbr-if=\"showTitle\" class=\"mbr-title align-center mbr-fonts-style mbr-bold\" mbr-theme-style=\"display-5\" data-app-selector=\".mbr-title\"><br><span style=\"font-weight: normal;\">My home and partner institutions</span></h2>\n        <h3 mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle\" class=\"mbr-section-subtitle align-center mbr-light mbr-fonts-style\" mbr-theme-style=\"display-5\">\n            <i>Shape your future web project with sharp design and refine coded functions.</i>\n        </h3>\n        <div class=\"mbr-section-btn align-center\" mbr-if=\"showButtons\" mbr-buttons mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnAdd,-mbrBtnMove\">\n            <a class=\"btn btn-primary\" href=\"https://mobirise.com\">LEARN MORE</a>\n            <a class=\"btn btn-black-outline\" href=\"https://mobirise.com\">LIVE DEMO</a>\n        </div>\n    </div>\n</section>",
           "_cid": "r0HKgmTM0k",
           "_anchor": "content1-b",
+          "_protectedParams": [],
+          "_global": false,
+          "_once": false,
+          "_params": {}
+        },
+        {
+          "_styles": {
+            "padding-top": "(@paddingTop * 15px)",
+            "padding-bottom": "(@paddingBottom * 15px)",
+            "background-color": "@bgColor",
+            ".mbr-row": {
+              "margin-left": "0",
+              "margin-right": "0"
+            },
+            ".mbr-section-title": {
+              "padding-bottom": "3rem"
+            },
+            ".google-map": {
+              "height": "25rem",
+              "position": "relative",
+              "width": "100%",
+              "iframe": {
+                "height": "100%",
+                "width": "100%"
+              },
+              "[data-state-details]": {
+                "color": "#6b6763",
+                "font-family": "Montserrat",
+                "height": "1.5em",
+                "margin-top": "-0.75em",
+                "padding-left": "1.25rem",
+                "padding-right": "1.25rem",
+                "position": "absolute",
+                "text-align": "center",
+                "top": "50%",
+                "width": "100%"
+              },
+              "&[data-state]": {
+                "background": "#e9e5dc"
+              },
+              "&[data-state=\"loading\"]": {
+                "[data-state-details]": {
+                  "display": "none"
+                }
+              }
+            },
+            ".map-placeholder": {
+              "display": "none"
+            },
+            "h4": {
+              "padding-top": "5rem",
+              "color": "#767676",
+              "text-align": "center"
+            }
+          },
+          "_name": "map1",
+          "_customHTML": "<section class=\"map\" group=\"Maps\" plugins=\"amp-main,amp-iframe\">\n\n    <mbr-parameters>\n    <!-- Block of parameters for component -->\n\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" value=\"4\" step=\"1\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" value=\"4\" step=\"1\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n        <input type=\"map\" title=\"Map\" name=\"googleMap\" place-id=\"ChIJq6oaW6jGdkgRJ_MLPdQmlow\" value=\"Cyber Security Oxford\nWolfson Building \nParks Road \nOXFORD \nOX1 3QD \nUK\">\n    <!-- End block of parameters -->\n    </mbr-parameters>\n    <div class=\"mbr-row mbr-justify-content-center\">\n        <div class=\"map-title mbr-col-sm-12 mbr-col-md-12 align-center\">\n            <h2 class=\"mbr-section-title mbr-fonts-style\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title, .map-title\">\n                Full Width Map\n            </h2>\n        </div>\n        <div class=\"google-map\" mbr-map=\"googleMap\"></div>\n        <div class=\"map-placeholder\">\n            <h4 placeholder>Google Map Initialization...</h4>\n        </div>\n    </div>\n</section>",
+          "_cid": "r0ClEFlBFF",
+          "_anchor": "map1-3",
           "_protectedParams": [],
           "_global": false,
           "_once": false,
@@ -216,32 +379,6 @@
           "_styles": {
             "padding-top": "(@paddingTop * 15px)",
             "padding-bottom": "(@paddingBottom * 15px)",
-            "& when (@bg-type = 'color')": {
-              "background-color": "@bg-value"
-            },
-            "& when (@bg-type = 'image')": {
-              "background-image": "url(@bg-value)"
-            },
-            ".mbr-title": {
-              "padding-bottom": "1rem"
-            },
-            ".mbr-section-btn": {
-              "padding-top": "1.5rem"
-            }
-          },
-          "_name": "content1",
-          "_customHTML": "<section class=\"mbr-section content1\" group=\"Article\" plugins=\"amp-main\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Show Subtitle\" name=\"showSubtitle\">\n        <input type=\"checkbox\" title=\"Show Buttons\" name=\"showButtons\">\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background3.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"mbr-container\">\n        <h2 mbr-if=\"showTitle\" class=\"mbr-title align-center mbr-fonts-style mbr-bold\" mbr-theme-style=\"display-5\" data-app-selector=\".mbr-title\"><span style=\"font-weight: normal;\">\n            <a href=\"assets/files/Arthur_LAUDRAIN_CV_EN_261118_QR.pdf\" target=\"_blank\">My full CV</a></span></h2>\n        <h3 mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle\" class=\"mbr-section-subtitle align-center mbr-light mbr-fonts-style\" mbr-theme-style=\"display-5\">\n            <i>Shape your future web project with sharp design and refine coded functions.</i>\n        </h3>\n        <div class=\"mbr-section-btn align-center\" mbr-if=\"showButtons\" mbr-buttons mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnAdd,-mbrBtnMove\">\n            <a class=\"btn btn-primary\" href=\"https://mobirise.co\">LEARN MORE</a>\n            <a class=\"btn btn-black-outline\" href=\"https://mobirise.co\">LIVE DEMO</a>\n        </div>\n    </div>\n</section>",
-          "_cid": "r976R3oa9H",
-          "_anchor": "content1-i",
-          "_protectedParams": [],
-          "_global": false,
-          "_once": false,
-          "_params": {}
-        },
-        {
-          "_styles": {
-            "padding-top": "(@paddingTop * 15px)",
-            "padding-bottom": "(@paddingBottom * 15px)",
             "background-color": "@bgColor",
             ".mbr-text": {
               "padding": "2rem 0"
@@ -308,7 +445,7 @@
             }
           },
           "_name": "content2",
-          "_customHTML": "<section class=\"content2 mbr-section article\" plugins=\"amp-main\">\n    \n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    <!-- End block parameters -->\n    </mbr-parameters> \n\n    <div class=\"container\">\n        <div class=\"mbr-row mbr-justify-content-center\">\n            <div class=\"mbr-col-sm-12 mbr-col-md-10 mbr-col-lg-8\">\n                <h3 class=\"mbr-fonts-style mbr-section-title mbr-light\" mbr-if=\"showTitle\" mbr-theme-style=\"display-5\" data-app-selector=\".mbr-section-title\">\n                    PUBLICATIONS<br></h3>\n                <p class=\"mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".mbr-text\" data-multiline mbr-article><b>FORTHCOMING &amp; IN PROGRESS</b><br><br>“Autonomous Weapons and the Law of Targeting: Can Technology Reinforce Humanitarian Principles?”, <i>International Review of the Red Cross</i>, Digital Technology and War Special Edition. Revised and resubmitted (first draft).<br><br>Big Smart Brother? How Smart Cities May Redefine the Right to Privacy in Europe, LL.M. thesis, <i>Grotius Centre for International Legal Studies</i>, due July 2018. Research supervised by Prof. Emma Irving (Leiden University).<br><br><b>PEER-REVIEWED ARTICLE</b><br><br>“A Game of Battleship: Deciphering American and Chinese Activities in the South China Sea and the Asia-Pacific Region’’, <i>Srife Journal</i>, London, n°7, Summer 2017 (with Cheng Lai Ki and Lincoln Pigman). Available at: <a href=\"http://www.strifejournal.org/index.php/archive/32-issue-7\" target=\"_blank\">http://www.strifejournal.org/index.php/archive/32-issue-7</a><br><br><b>CONFERENCE PRESENTATIONS &amp; PAPERS</b><br><br>“State Control over Information in the Fight Against Insurrections: the Tunisian Revolution (2010-2011)”, presented at Sciences Po – CERI, <i>(Re)thinking War, Annual Conference on War and Strategy</i>, Paris, December 15th, 2016. See: <a href=\"http://www.aeges.fr/wp-content/uploads/2016/11/aeges-programme-conference-2016.pdf \" target=\"_blank\">http://www.aeges.fr/wp-content/uploads/2016/11/aeges-programme-conference-2016.pdf </a><br><br>“Sovereignty in Cyberspace:  Balkanization or Democratization”, in <i>Proceedings of NATO CyCon U.S. - International Conference on Cyber Conflict</i>, Washington DC, October 23rd, 2016, pp. 146-154 (with Stéphane Taillat, Didier Danet,  Amäel Cataruzza; supported by the Sogeti-Thalès Chair of Cyberdefence). Available at: <a href=\"http://ieeexplore.ieee.org/document/7836628/\" target=\"_blank\">http://ieeexplore.ieee.org/document/7836628/</a><br><br><b>POLICY REPORTS &amp; NON-SCIENTIFIC PAPERS</b><br><br>“Fundamentals and Processes of Arms Procurement in Europe”, <i>CSS Study</i>, Center for Security Studies – ETH Zurich, Zurich, February 25th 2018 (with Martin Zapfe, Michael Haas and Annabelle Vuille) (in German).<br><br>“Big Smart Brother? How Smart Cities May Redefine the Right to Privacy in Europe”, <i>CyberWorld Magazine</i>, SecGate, London, n°17, March 2018, pp. 19-22. Available at <a href=\"https://cyberworld.news/uncategorized/editions/cyber-world-march-2018/\" target=\"_blank\">https://cyberworld.news/uncategorized/editions/cyber-world-march-2018/</a> <br><br>“How Can a Bad User-Interface Jeopardise a User’s Security and Privacy? Apple Found Out.”, <i>CyberWorld Magazine</i>, SecGate, London, n°13, November 2017, pp. 21-26. Available at <a href=\"https://cyberworld.news/uncategorized/editions/cyber-world-november-2017/\" target=\"_blank\">https://cyberworld.news/uncategorized/editions/cyber-world-november-2017/</a><br><br>“Proliferation and Neo-realism: Analysing Tokyo’s Temptations Facing China and North Korea”, <i>Revue Défense Nationale</i>, Paris, n°801, June 2017, pp. 190-194 (in French). Re-edited in Les Deux Corée dans la RDN, Special Issue, December 2017, pp. 32-26 (in French).<br><br>“The Cybersecurity of Unmanned Aerial Vehicles”, <i>Srife Blog – Cybersecurity in Practice Series </i>– Part II, London, Nov. 9th, 2016. Available at <a href=\"http://www.strifeblog.org/2016/11/09/cybersecurity-in-practice-part-ii-cybersecurity-of-unmanned-autonomous-vehicles/\" target=\"_blank\">http://www.strifeblog.org/2016/11/09/cybersecurity-in-practice-part-ii-cybersecurity-of-unmanned-autonomous-vehicles/</a><br><br>“The Warsaw Summit: NATO Revises its Global Security Concept”, <i>Air Force Strategic Note #97</i>, Paris, Nov. 2016. Available at <a href=\"http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n97varsovie_otan.pdf\" target=\"_blank\">http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n97varsovie_otan.pdf</a> (in French).<br><br>“Hybrid Warfare: Facing Russia, NATO Embarks Into Strategic Communication”, <i>Air Force Strategic Note #96</i>, Paris,  Nov. 2016. Available at <a href=\"http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n96guerrehybride.pdf\" target=\"_blank\">http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n96guerrehybride.pdf</a> (in French).<br><br>“Opium Production in Afghanistan: Narco-economy, Political Dispersion and State Sovereignty”, <i>Revue Défense Nationale</i>, Tribune 687, Paris, Sep. 17th, 2015. Available at <a href=\"http://defnat.fr/site_fr/pdf/Laudrain%20-%20L%E2%80%99opium%20en%20Afghanistan%20(T%20687).pdf\" target=\"_blank\">http://defnat.fr/site_fr/pdf/Laudrain%20-%20L%E2%80%99opium%20en%20Afghanistan%20(T%20687).pdf</a> (in French).<br></p>\n            </div>\n        </div>\n    </div>\n</section>",
+          "_customHTML": "<section class=\"content2 mbr-section article\" plugins=\"amp-main\">\n    \n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"0\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    <!-- End block parameters -->\n    </mbr-parameters> \n\n    <div class=\"container\">\n        <div class=\"mbr-row mbr-justify-content-center\">\n            <div class=\"mbr-col-sm-12 mbr-col-md-10 mbr-col-lg-8\">\n                <h3 class=\"mbr-fonts-style mbr-section-title mbr-light\" mbr-if=\"showTitle\" mbr-theme-style=\"display-5\" data-app-selector=\".mbr-section-title\">\n                    PUBLICATIONS<br></h3>\n                <p class=\"mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".mbr-text\" data-multiline mbr-article><b>FORTHCOMING &amp; IN PROGRESS</b><br><br>“Autonomous Weapons and the Law of Targeting: Can Technology Reinforce Humanitarian Principles?”, <i>International Review of the Red Cross</i>, Digital Technology and War Special Edition. Revised and resubmitted.<br><br><b>PEER-REVIEWED ARTICLE</b><br><br>“A Game of Battleship: Deciphering American and Chinese Activities in the South China Sea and the Asia-Pacific Region’’, <i>Srife Journal</i>, London, n°7, Summer 2017 (with Cheng Lai Ki and Lincoln Pigman). Available at: <a href=\"http://www.strifejournal.org/index.php/archive/32-issue-7\" target=\"_blank\">http://www.strifejournal.org/index.php/archive/32-issue-7</a><br><br><b>CONFERENCE PRESENTATIONS &amp; PAPERS</b><br><br>“Autonomous Weapons and the Law of Targeting: Can Technology Reinforce Humanitarian Principles?”, presented at Université Paris II - Panthéon Assas, <i>European Initiative for Security Studies - EISS</i>, Paris, June 25th, 2018.<br><br>“State Control over Information in the Fight Against Insurrections: the Tunisian Revolution (2010-2011)”, presented at Sciences Po – CERI, <i>(Re)thinking War, Annual Conference on War and Strategy</i>, Paris, December 15th, 2016. See: <a href=\"http://www.aeges.fr/wp-content/uploads/2016/11/aeges-programme-conference-2016.pdf \" target=\"_blank\">http://www.aeges.fr/wp-content/uploads/2016/11/aeges-programme-conference-2016.pdf </a><br><br>“Sovereignty in Cyberspace:  Balkanization or Democratization”, in <i>Proceedings of NATO CyCon U.S. - International Conference on Cyber Conflict</i>, Washington DC, October 23rd, 2016, pp. 146-154 (with Stéphane Taillat, Didier Danet,  Amäel Cataruzza; supported by the Sogeti-Thalès Chair of Cyberdefence). Available at: <a href=\"http://ieeexplore.ieee.org/document/7836628/\" target=\"_blank\">http://ieeexplore.ieee.org/document/7836628/</a><br><br><b>POLICY REPORTS &amp; NON-SCIENTIFIC PAPERS</b><br><br>“Fundamentals and Processes of Arms Procurement in Europe”, <i>CSS Study</i>, Center for Security Studies – ETH Zurich, February 25th 2018 (with Martin Zapfe, Michael Haas and Annabelle Vuille) (in German).<br><br>“Big Smart Brother? How Smart Cities May Redefine the Right to Privacy in Europe”, <i>CyberWorld Magazine</i>, SecGate, London, n°17, March 2018, pp. 19-22. Available at <a href=\"https://cyberworld.news/uncategorized/editions/cyber-world-march-2018/\" target=\"_blank\">https://cyberworld.news/uncategorized/editions/cyber-world-march-2018/</a> <br><br>“How Can a Bad User-Interface Jeopardise a User’s Security and Privacy? Apple Found Out.”, <i>CyberWorld Magazine</i>, SecGate, London, n°13, November 2017, pp. 21-26. Available at <a href=\"https://cyberworld.news/uncategorized/editions/cyber-world-november-2017/\" target=\"_blank\">https://cyberworld.news/uncategorized/editions/cyber-world-november-2017/</a><br><br>“Proliferation and Neo-realism: Analysing Tokyo’s Temptations Facing China and North Korea”, <i>Revue Défense Nationale</i>, Paris, n°801, June 2017, pp. 190-194 (in French). Re-edited in Les Deux Corée dans la RDN, Special Issue, December 2017, pp. 32-26 (in French).<br><br>“The Cybersecurity of Unmanned Aerial Vehicles”, <i>Srife Blog – Cybersecurity in Practice Series </i>– Part II, London, Nov. 9th, 2016. Available at <a href=\"http://www.strifeblog.org/2016/11/09/cybersecurity-in-practice-part-ii-cybersecurity-of-unmanned-autonomous-vehicles/\" target=\"_blank\">http://www.strifeblog.org/2016/11/09/cybersecurity-in-practice-part-ii-cybersecurity-of-unmanned-autonomous-vehicles/</a><br><br>“The Warsaw Summit: NATO Revises its Global Security Concept”, <i>Air Force Strategic Note #97</i>, Paris, Nov. 2016. Available at <a href=\"http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n97varsovie_otan.pdf\" target=\"_blank\">http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n97varsovie_otan.pdf</a> (in French).<br><br>“Hybrid Warfare: Facing Russia, NATO Embarks Into Strategic Communication”, <i>Air Force Strategic Note #96</i>, Paris,  Nov. 2016. Available at <a href=\"http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n96guerrehybride.pdf\" target=\"_blank\">http://www.cerpa.air.defense.gouv.fr/images/pdf/Note_Cesa/n96guerrehybride.pdf</a> (in French).<br><br>“Opium Production in Afghanistan: Narco-economy, Political Dispersion and State Sovereignty”, <i>Revue Défense Nationale</i>, Tribune 687, Paris, Sep. 17th, 2015. Available at <a href=\"http://defnat.fr/site_fr/pdf/Laudrain%20-%20L%E2%80%99opium%20en%20Afghanistan%20(T%20687).pdf\" target=\"_blank\">http://defnat.fr/site_fr/pdf/Laudrain%20-%20L%E2%80%99opium%20en%20Afghanistan%20(T%20687).pdf</a> (in French).<br></p>\n            </div>\n        </div>\n    </div>\n</section>",
           "_cid": "r0Cslo4eMk",
           "_anchor": "content2-7",
           "_protectedParams": [],
@@ -341,93 +478,6 @@
           "_styles": {
             "padding-top": "(@paddingTop * 15px)",
             "padding-bottom": "(@paddingBottom * 15px)",
-            "background-color": "@bgColor",
-            "h1": {
-              "margin-bottom": "20px"
-            },
-            ".wrapper": {
-              "text-align": "center"
-            },
-            ".amp-iconfont": {
-              "padding": "1rem",
-              "margin": ".5rem",
-              "background": "@iconsBg",
-              "color": "contrast(@iconsBg, darken(@iconsBg, 50%), #ffffff, 60%)",
-              "font-size": "~\"@{iconsSize}rem\""
-            }
-          },
-          "_name": "social-follow",
-          "_customHTML": "<section class=\"social-follow\" group=\"Social\" plugins=\"amp-main\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" value=\"3\" step=\"1\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" value=\"4\" step=\"1\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\" checked>\n        <input type=\"range\" inline title=\"Icons Count\" name=\"iconsCount\" min=\"1\" max=\"10\" value=\"7\" step=\"1\">\n        <input type=\"range\" inline title=\"Icons Size\" name=\"iconsSize\" min=\"0.8\" max=\"5\" step=\"0.1\" value=\"2\">\n        <input type=\"color\" name=\"iconsBg\" title=\"Icons Bg\" value=\"#197bc6\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    </mbr-parameters>\n\n    <div class=\"wrapper\">\n        <h1 class=\"mbr-fonts-style align-center mbr-light\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\">\n            For more information</h1>\n        <div class=\"icons-list\" mbr-list mbr-list-grow=\"iconsCount\">\n            <a href=\"https://www.youtube.com/user/oxford/\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-youtube fa\"></span>\n            </a>\n            <a href=\"https://www.facebook.com/OxfordCTGA/\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-facebook-square fa\"></span>\n            </a>\n            <a href=\"https://www.cybersecurity.ox.ac.uk\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-institution fa\"></span>\n            </a>\n            <a href=\"http://linkedin.com/in/arthurlaudrain\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-linkedin-square fa\"></span></a>\n            <a href=\"https://dblp.org/pers/hd/l/Laudrain:Arthur\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-stack-overflow fa\"></span>\n            </a>\n            \n                <a href=\"https://keybase.io/apb_ldn\" target=\"_blank\"><span mbr-icon class=\"amp-iconfont fa-comment fa\"></span></a>\n            \n            <a href=\"https://twitter.com/APB_Laudrain\" target=\"_blank\">\n                <span mbr-icon class=\"amp-iconfont fa-twitter fa\"></span>\n            </a>\n        </div>\n    </div>\n</section>",
-          "_cid": "r0ClGsgWFi",
-          "_anchor": "social-follow-4",
-          "_protectedParams": [],
-          "_global": false,
-          "_once": false,
-          "_params": {}
-        },
-        {
-          "_styles": {
-            "padding-top": "(@paddingTop * 15px)",
-            "padding-bottom": "(@paddingBottom * 15px)",
-            "background-color": "@bgColor",
-            ".mbr-row": {
-              "margin-left": "0",
-              "margin-right": "0"
-            },
-            ".mbr-section-title": {
-              "padding-bottom": "3rem"
-            },
-            ".google-map": {
-              "height": "25rem",
-              "position": "relative",
-              "width": "100%",
-              "iframe": {
-                "height": "100%",
-                "width": "100%"
-              },
-              "[data-state-details]": {
-                "color": "#6b6763",
-                "font-family": "Montserrat",
-                "height": "1.5em",
-                "margin-top": "-0.75em",
-                "padding-left": "1.25rem",
-                "padding-right": "1.25rem",
-                "position": "absolute",
-                "text-align": "center",
-                "top": "50%",
-                "width": "100%"
-              },
-              "&[data-state]": {
-                "background": "#e9e5dc"
-              },
-              "&[data-state=\"loading\"]": {
-                "[data-state-details]": {
-                  "display": "none"
-                }
-              }
-            },
-            ".map-placeholder": {
-              "display": "none"
-            },
-            "h4": {
-              "padding-top": "5rem",
-              "color": "#767676",
-              "text-align": "center"
-            }
-          },
-          "_name": "map1",
-          "_customHTML": "<section class=\"map\" group=\"Maps\" plugins=\"amp-main,amp-iframe\">\n\n    <mbr-parameters>\n    <!-- Block of parameters for component -->\n\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" value=\"4\" step=\"1\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" value=\"4\" step=\"1\">\n        <input type=\"checkbox\" title=\"Show Title\" name=\"showTitle\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n        <input type=\"map\" title=\"Map\" name=\"googleMap\" place-id=\"ChIJq6oaW6jGdkgRJ_MLPdQmlow\" value=\"Cyber Security Oxford\nWolfson Building \nParks Road \nOXFORD \nOX1 3QD \nUK\">\n    <!-- End block of parameters -->\n    </mbr-parameters>\n    <div class=\"mbr-row mbr-justify-content-center\">\n        <div class=\"map-title mbr-col-sm-12 mbr-col-md-12 align-center\">\n            <h2 class=\"mbr-section-title mbr-fonts-style\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title, .map-title\">\n                Full Width Map\n            </h2>\n        </div>\n        <div class=\"google-map\" mbr-map=\"googleMap\"></div>\n        <div class=\"map-placeholder\">\n            <h4 placeholder>Google Map Initialization...</h4>\n        </div>\n    </div>\n</section>",
-          "_cid": "r0ClEFlBFF",
-          "_anchor": "map1-3",
-          "_protectedParams": [],
-          "_global": false,
-          "_once": false,
-          "_params": {}
-        },
-        {
-          "_styles": {
-            "padding-top": "(@paddingTop * 15px)",
-            "padding-bottom": "(@paddingBottom * 15px)",
             "& when (@bg-type = 'image')": {
               "background-image": "url(@bg-value)"
             },
@@ -443,7 +493,7 @@
             }
           },
           "_name": "footer1",
-          "_customHTML": "<section class=\"footer1\" group=\"Footers\" plugins=\"amp-main\" global once=\"footer\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background4.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"container\">\n        <div class=\"mbr-col-sm-12 align-center mbr-white\">\n            <p class=\"mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".mbr-col-sm-12, .mbr-text\" data-app-placeholder=\"Type Text\">\n                © Copyright 2019 Arthur P.B. LAUDRAIN - All Rights Reserved\n            <br>Any third-party image and content remains the property of its owners<br><br>Last update: 17/01/2019</p>\n        </div>\n    </div>\n</section>",
+          "_customHTML": "<section class=\"footer1\" group=\"Footers\" plugins=\"amp-main\" global once=\"footer\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"2\">\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Background Image\" value=\"../_images/background4.jpg\">\n            <input type=\"color\" title=\"Background Color\" value=\"#ffffff\" selected>\n        </fieldset>\n    <!-- End block parameters -->\n    </mbr-parameters>\n\n    <div class=\"container\">\n        <div class=\"mbr-col-sm-12 align-center mbr-white\">\n            <p class=\"mbr-text mbr-fonts-style\" mbr-theme-style=\"display-7\" data-app-selector=\".mbr-col-sm-12, .mbr-text\" data-app-placeholder=\"Type Text\">\n                © Copyright 2019 Arthur P.B. LAUDRAIN - All Rights Reserved\n            <br>Any third-party image and content remains the property of its owners<br><br>Last update: 12/02/2019</p>\n        </div>\n    </div>\n</section>",
           "_cid": "r0ClIUHuFw",
           "_anchor": "footer1-5",
           "_protectedParams": [],
