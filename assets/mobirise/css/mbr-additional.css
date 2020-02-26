@@ -744,6 +744,29 @@ section.lazy-placeholder:after {
     font-size: .85rem;
   }
 }
+.cid-rRD6g8z4qF {
+  padding-top: 75px;
+  padding-bottom: 30px;
+  background-color: #ffffff;
+}
+.cid-rRD6g8z4qF .line {
+  background-color: #149dcc;
+  color: #149dcc;
+  align: center;
+  height: 2px;
+  margin: 0 auto;
+}
+.cid-rRD6g8z4qF .section-text {
+  padding: 2rem 0;
+}
+.cid-rRD6g8z4qF .inner-container {
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .cid-rRD6g8z4qF .inner-container {
+    width: 100% !important;
+  }
+}
 .cid-rQRufQ7P5O {
   padding-top: 75px;
   padding-bottom: 30px;
