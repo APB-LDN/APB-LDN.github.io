@@ -40,7 +40,7 @@
         "url": "https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i"
       }
     ],
-    "favicon": false,
+    "favicon": "@PROJECT_PATH@/assets/images/screenshot-2020-03-02-at-16.37.04-128x130.png",
     "noImageResize": null,
     "robotsSwitcher": true,
     "sitemapSwitcher": true,
