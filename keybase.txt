@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/apb_ldn
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://apb-ldn.org
+  * I am apb_ldn (https://keybase.io/apb_ldn) on keybase.
+  * I have a public key ASD60QUPwZ0KL415BnZMemLiSrK8Q0_hK5edT7n7DFYW2Qo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120fad1050fc19d0a2f8d7906764c7a62e24ab2bc434fe12b979d4fb9fb0c5616d90a",
+      "host": "keybase.io",
+      "kid": "0120fad1050fc19d0a2f8d7906764c7a62e24ab2bc434fe12b979d4fb9fb0c5616d90a",
+      "uid": "5b3717f418a80f3f7dc785c472b10b19",
+      "username": "apb_ldn"
+    },
+    "merkle_root": {
+      "ctime": 1620378654,
+      "hash": "d7957da5938b9c3eb12930867266edfd1bce40a5c09df7b33c81e95a456abad536b56724865b027e346d5e04c2a23dcc782ce8a9d0c2b510c9e06d8d3ff25dee",
+      "hash_meta": "5aff09fc29e33f4c4d45e2f7611bad678a4c00c1a1d7e321c7e04fbd1f831980",
+      "seqno": 19864269
+    },
+    "service": {
+      "entropy": "YnvwFnjecUMDFffdyY8BriYz",
+      "hostname": "apb-ldn.org",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.6.2"
+  },
+  "ctime": 1620378707,
+  "expire_in": 504576000,
+  "prev": "67eeb762cf34ff3cea68025df5660e5e973d9a661bee640f86f4f982dd4f6372",
+  "seqno": 22,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg+tEFD8GdCi+NeQZ2THpi4kqyvENP4SuXnU+5+wxWFtkKp3BheWxvYWTESpcCFsQgZ+63Ys80/zzqaAJd9WYOXpc9mmYb7mQPhvT5gt1PY3LEINBQcKGtnCiiiU3FREH9g93e9z4xLZ56CV5rLMLsqpG9AgHCo3NpZ8RAxwBPnNZEyORtfW1gG4acStGRqVdFXqv97BeT9wnklFdGMZA7FOe4guEpZSF0f2T9uO/BAbOT3CvCnubXfEktC6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIP9pwKh2kxgByp2ehaHwd/pS/jr7vEZIW5m6oT3+Lmhmo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/apb_ldn
+
+==================================================================
