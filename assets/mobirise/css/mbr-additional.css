@@ -740,6 +740,27 @@ section.lazy-placeholder:after {
 .cid-toFL4Nb3Uk .mbr-section-subtitle {
   color: #767676;
 }
+.cid-uOnt3kG9zg {
+  background: #ffffff;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.cid-uOnt3kG9zg .image-block {
+  margin: auto;
+}
+.cid-uOnt3kG9zg figcaption {
+  position: relative;
+}
+.cid-uOnt3kG9zg figcaption div {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .cid-uOnt3kG9zg .image-block {
+    width: 100% !important;
+  }
+}
 .cid-uH1Rkt4gAZ {
   padding-top: 60px;
   padding-bottom: 60px;
