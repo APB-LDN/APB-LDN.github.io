@@ -49,7 +49,6 @@
     "uniqCompNum": 35,
     "versionPublish": "6.0.1",
     "screenshot": "screenshot.png",
-    "google-analytics": "<!-- Global site tag (gtag.js) - Google Analytics -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-134365408-1\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'UA-134365408-1');\n</script>",
     "robotsText": "User-agent: *\nDisallow: /cgi-bin\n",
     "cookiesAlert": false,
     "gdpr": false,
