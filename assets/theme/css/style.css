@@ -2,6 +2,16 @@
  * Mobirise v4 theme (https://mobirise.com/)
  * Copyright 2017 Mobirise
  */
+html {
+  scroll-behavior: smooth;
+}
+
+.mbr-parallax-background {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
 section {
   background-color: #eeeeee;
 }
