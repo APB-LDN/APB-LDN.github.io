@@ -122,8 +122,8 @@ body {
 }
 .btn-secondary,
 .btn-secondary:active {
-  background-color: #ff3366 !important;
-  border-color: #ff3366 !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
   color: #ffffff !important;
 }
 .btn-secondary:hover,
@@ -294,14 +294,14 @@ body {
 .btn-secondary-outline.focus,
 .btn-secondary-outline.active {
   color: #ffffff;
-  background-color: #ff3366;
-  border-color: #ff3366;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 .btn-secondary-outline.disabled,
 .btn-secondary-outline:disabled {
   color: #ffffff !important;
-  background-color: #ff3366 !important;
-  border-color: #ff3366 !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
 }
 .btn-info-outline,
 .btn-info-outline:active {
@@ -421,7 +421,7 @@ body {
   color: #149dcc !important;
 }
 .text-secondary {
-  color: #ff3366 !important;
+  color: var(--primary-color) !important;
 }
 .text-success {
   color: #f7ed4a !important;
@@ -650,7 +650,7 @@ blockquote {
 .xdsoft_datetimepicker .xdsoft_calendar td:hover,
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box > div > div:hover {
   color: #ffffff !important;
-  background: #ff3366 !important;
+  background: var(--primary-color) !important;
   box-shadow: none !important;
 }
 .lazy-bg {
@@ -777,7 +777,7 @@ section.lazy-placeholder:after {
   }
 }
 .cid-uH1Rkt4gAZ .mbr-text {
-  color: #232323;
+  color: var(--text-color);
 }
 .cid-uH1RY6dj6E {
   background: #ffffff;
@@ -860,7 +860,7 @@ section.lazy-placeholder:after {
   }
 }
 .cid-toFKrUncZU .mbr-text {
-  color: #232323;
+  color: var(--text-color);
   text-align: left;
 }
 .cid-tlX7lJnpOk {

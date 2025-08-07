@@ -2,8 +2,20 @@
  * Mobirise v4 theme (https://mobirise.com/)
  * Copyright 2017 Mobirise
  */
+:root {
+  --primary-color: #ff3366;
+  --background-color: #eeeeee;
+  --text-color: #232323;
+}
+
+.dark-mode {
+  --primary-color: #ff3366;
+  --background-color: #232323;
+  --text-color: #eeeeee;
+}
+
 section {
-  background-color: #eeeeee;
+  background-color: var(--background-color);
 }
 
 .form-control:focus {
@@ -81,7 +93,8 @@ figure {
 }
 
 body {
-  color: #232323;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 h1,
@@ -128,7 +141,7 @@ blockquote {
   padding: 10px 0 10px 20px;
   position: relative;
   border-left: 2px solid;
-  border-color: #ff3366;
+  border-color: var(--primary-color);
 }
 
 input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
