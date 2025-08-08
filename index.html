@@ -248,7 +248,10 @@
 
     container.innerHTML = '<p>Loading Google Scholar data…</p>';
 
-    const endpoint = '/api/scholar?user=EC5PfaUAAAAJ';
+    const endpoint = '/api/scholar?user=EC5PfaUAAAAJ&sortby=pubdate';
+    const CACHE_KEY = 'scholarData';
+    const CACHE_TIME_KEY = 'scholarDataTime';
+    const CACHE_TTL = 1000 * 60 * 60; // 1 hour
 
     const showError = () => {
       container.innerHTML = `
@@ -260,7 +263,28 @@
       if (retry) retry.addEventListener('click', loadScholar);
     };
 
+    const render = (totalCitations, publications) => {
+      let htmlContent = `<p class="mb-4"><strong>Total citations:</strong> ${totalCitations}</p>`;
+      if (publications.length < 5) {
+        htmlContent += '<p class="text-sm italic mb-2">Fewer than five publications available.</p>';
+      }
+      htmlContent += '<ul class="text-left max-w-3xl mx-auto">';
+      publications.forEach(pub => {
+        htmlContent += `<li class="mb-2"><a href="${pub.link}" target="_blank" class="text-indigo-700 hover:underline">${pub.title}</a> - Citations: ${pub.citations}</li>`;
+      });
+      htmlContent += '</ul>';
+      container.innerHTML = htmlContent;
+    };
+
     try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+      if (cached && cachedTime && Date.now() - Number(cachedTime) < CACHE_TTL) {
+        const { totalCitations, publications } = JSON.parse(cached);
+        render(totalCitations, publications);
+        return;
+      }
+
       const response = await fetch(endpoint);
       if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
       const html = await response.text();
@@ -273,26 +297,20 @@
 
       const totalCitations = citationCell.textContent.trim();
 
-      const publications = [];
-      rows.forEach((row, i) => {
-        if (i < 5) {
-          const titleLink = row.querySelector('a.gsc_a_at');
-          const citation = row.querySelector('a.gsc_a_ac');
-          publications.push({
-            title: titleLink ? titleLink.textContent.trim() : 'Untitled',
-            link: titleLink ? 'https://scholar.google.com' + titleLink.getAttribute('href') : '#',
-            citations: citation ? (citation.textContent.trim() || '0') : '0'
-          });
-        }
+      const publications = Array.from(rows).slice(0, 5).map(row => {
+        const titleLink = row.querySelector('a.gsc_a_at');
+        const citation = row.querySelector('a.gsc_a_ac');
+        return {
+          title: titleLink ? titleLink.textContent.trim() : 'Untitled',
+          link: titleLink ? 'https://scholar.google.com' + titleLink.getAttribute('href') : '#',
+          citations: citation ? (citation.textContent.trim() || '0') : '0'
+        };
       });
 
-      let htmlContent = `<p class="mb-4"><strong>Total citations:</strong> ${totalCitations}</p>`;
-      htmlContent += '<ul class="text-left max-w-3xl mx-auto">';
-      publications.forEach(pub => {
-        htmlContent += `<li class="mb-2"><a href="${pub.link}" target="_blank" class="text-indigo-700 hover:underline">${pub.title}</a> - Citations: ${pub.citations}</li>`;
-      });
-      htmlContent += '</ul>';
-      container.innerHTML = htmlContent;
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ totalCitations, publications }));
+      localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+
+      render(totalCitations, publications);
     } catch (e) {
       console.error('Error loading Google Scholar data:', e);
       showError();
