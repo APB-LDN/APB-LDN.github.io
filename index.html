@@ -174,15 +174,15 @@
     </div>
   </section>
 
-  <!-- Academic Networks -->
-  <section class="py-12">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Academic networks</h2>
-      <p class="text-center mb-8">
-        Browse through my latest research<br><br>
-        <strong>ORCID ID</strong>: <a href="https://orcid.org/0000-0002-8642-2671" target="_blank" class="text-indigo-700 hover:underline">0000-0002-8642-2671</a><br>
-        <strong>Scopus Author ID</strong>: <a href="https://www.scopus.com/authid/detail.uri?authorId=57204062130" target="_blank" class="text-indigo-700 hover:underline">57204062130</a>
-      </p>
+    <!-- Publications -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Publications</h2>
+        <p class="text-center mb-8">
+          Browse through my latest research<br><br>
+          <strong>ORCID ID</strong>: <a href="https://orcid.org/0000-0002-8642-2671" target="_blank" class="text-indigo-700 hover:underline">0000-0002-8642-2671</a><br>
+          <strong>Scopus Author ID</strong>: <a href="https://www.scopus.com/authid/detail.uri?authorId=57204062130" target="_blank" class="text-indigo-700 hover:underline">57204062130</a>
+        </p>
       <div id="openalex-profile" class="text-center"></div>
     </div>
   </section>
@@ -265,9 +265,25 @@
       if (retry) retry.addEventListener('click', loadOpenAlex);
     };
 
-    const renderList = works => works.map(w =>
-      `<li class="mb-2"><a href="${w.link}" target="_blank" class="text-indigo-700 hover:underline">${w.title}</a> (${w.year}) - Citations: ${w.citations}</li>`
-    ).join('');
+    const filterWorks = works => {
+      const seen = new Set();
+      return works.filter(w => {
+        if (!w || !w.link) return false;
+        const key = w.doi || w.link;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    };
+
+    const renderList = works => works.map(w => `
+      <li class="mb-4">
+        <a href="${w.link}" target="_blank" class="text-lg text-indigo-700 hover:underline">${w.title}</a>
+        <div class="text-sm text-gray-600">
+          ${w.year ? w.year : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}
+        </div>
+      </li>
+    `).join('');
 
     const render = data => {
       let html = `<p class="mb-4"><strong>Total publications:</strong> ${data.publications}<br><strong>Total citations:</strong> ${data.citations}</p>`;
@@ -290,26 +306,34 @@
       if (!authorRes.ok) throw new Error(`Author request failed with status ${authorRes.status}`);
       const author = await authorRes.json();
 
-      const recentRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=publication_date:desc&per-page=5&${mailto}`);
+      const recentRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=publication_date:desc&per-page=15&${mailto}`);
       if (!recentRes.ok) throw new Error(`Recent works request failed with status ${recentRes.status}`);
       const recent = await recentRes.json();
 
-      const topRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=cited_by_count:desc&per-page=5&${mailto}`);
+      const topRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=cited_by_count:desc&per-page=15&${mailto}`);
       if (!topRes.ok) throw new Error(`Top works request failed with status ${topRes.status}`);
       const top = await topRes.json();
 
-      const mapWork = w => ({
-        title: w.display_name || 'Untitled',
-        link: w.doi ? `https://doi.org/${w.doi}` : w.id,
-        year: w.publication_year || '',
-        citations: w.cited_by_count || 0
-      });
+      const mapWork = w => {
+        if (!w.doi && !w.id) return null;
+        return {
+          title: w.display_name || 'Untitled',
+          link: w.doi ? `https://doi.org/${w.doi}` : w.id,
+          doi: w.doi || null,
+          year: w.publication_year || '',
+          citations: w.cited_by_count || 0
+        };
+      };
+
+      const recentWorks = filterWorks(recent.results.map(mapWork)).slice(0, 5);
+      const recentKeys = new Set(recentWorks.map(w => w.doi || w.link));
+      const topWorks = filterWorks(top.results.map(mapWork).filter(w => !recentKeys.has(w.doi || w.link))).slice(0, 5);
 
       const data = {
         publications: author.works_count,
         citations: author.cited_by_count,
-        recent: recent.results.map(mapWork),
-        top: top.results.map(mapWork)
+        recent: recentWorks,
+        top: topWorks
       };
 
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
