@@ -248,7 +248,7 @@
 
     container.innerHTML = '<p>Loading Google Scholar data…</p>';
 
-    const endpoint = '/api/scholar?user=EC5PfaUAAAAJ&sortby=pubdate';
+    const endpoint = 'https://apb-ldn.netlify.app/.netlify/functions/scholar?user=EC5PfaUAAAAJ&sortby=pubdate';
     const CACHE_KEY = 'scholarData';
     const CACHE_TIME_KEY = 'scholarDataTime';
     const CACHE_TTL = 1000 * 60 * 60; // 1 hour
