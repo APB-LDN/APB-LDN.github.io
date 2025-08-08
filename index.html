@@ -252,7 +252,6 @@
     const base = 'https://api.openalex.org';
     const mailto = 'mailto=contact@apb-ldn.org';
     const CACHE_KEY = 'openAlexData';
-    const CACHE_TIME_KEY = 'openAlexDataTime';
     const CACHE_TTL = 1000 * 60 * 60; // 1 hour
 
     const showError = () => {
@@ -287,19 +286,39 @@
 
     const render = data => {
       let html = `<p class="mb-4"><strong>Total publications:</strong> ${data.publications}<br><strong>Total citations:</strong> ${data.citations}</p>`;
-      html += '<h3 class="text-xl font-semibold mb-2">Last 5 publications</h3>';
-      html += `<ul class="text-left max-w-3xl mx-auto mb-6">${renderList(data.recent)}</ul>`;
-      html += '<h3 class="text-xl font-semibold mb-2">Top 5 cited publications</h3>';
-      html += `<ul class="text-left max-w-3xl mx-auto">${renderList(data.top)}</ul>`;
+      html += '<div class="mb-4">';
+      html += '<button class="openalex-tab px-4 py-2 bg-indigo-200 text-indigo-700 rounded-t" data-tab="recent">Recent</button>';
+      html += '<button class="openalex-tab px-4 py-2 bg-gray-100 text-indigo-700 rounded-t ml-2" data-tab="top">Top Cited</button>';
+      html += '</div>';
+      html += `<ul class="text-left max-w-3xl mx-auto mb-6" data-content="recent">${renderList(data.recent)}</ul>`;
+      html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="top">${renderList(data.top)}</ul>`;
+      html += `<p class="text-sm text-gray-500 mt-6">Source: <a href="https://openalex.org/" target="_blank" class="underline text-indigo-700">OpenAlex</a> · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the source.</em></p>`;
       container.innerHTML = html;
+
+      const tabs = container.querySelectorAll('.openalex-tab');
+      const contents = container.querySelectorAll('[data-content]');
+      tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tab = btn.dataset.tab;
+          tabs.forEach(t => {
+            t.classList.toggle('bg-indigo-200', t === btn);
+            t.classList.toggle('bg-gray-100', t !== btn);
+          });
+          contents.forEach(c => {
+            c.classList.toggle('hidden', c.dataset.content !== tab);
+          });
+        });
+      });
     };
 
     try {
       const cached = localStorage.getItem(CACHE_KEY);
-      const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
-      if (cached && cachedTime && Date.now() - Number(cachedTime) < CACHE_TTL) {
-        render(JSON.parse(cached));
-        return;
+      if (cached) {
+        const cachedData = JSON.parse(cached);
+        if (Date.now() - cachedData.updated < CACHE_TTL) {
+          render(cachedData);
+          return;
+        }
       }
 
       const authorRes = await fetch(`${base}/authors/${authorId}?${mailto}`);
@@ -333,11 +352,11 @@
         publications: author.works_count,
         citations: author.cited_by_count,
         recent: recentWorks,
-        top: topWorks
+        top: topWorks,
+        updated: Date.now()
       };
 
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
 
       render(data);
     } catch (e) {
