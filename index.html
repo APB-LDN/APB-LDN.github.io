@@ -292,7 +292,7 @@
       html += '</div>';
       html += `<ul class="text-left max-w-3xl mx-auto mb-6" data-content="recent">${renderList(data.recent)}</ul>`;
       html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="top">${renderList(data.top)}</ul>`;
-      html += `<p class="text-sm text-gray-500 mt-6">Source: <a href="https://openalex.org/" target="_blank" class="underline text-indigo-700">OpenAlex</a> · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the source.</em></p>`;
+      html += `<p class="text-sm text-gray-500 mt-6">Source: <a href="https://openalex.org/" target="_blank" class="underline text-indigo-700">OpenAlex</a> · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the source.</em><br>This publication widget is an experimental module (WIP)</p>`;
       container.innerHTML = html;
 
       const tabs = container.querySelectorAll('.openalex-tab');
