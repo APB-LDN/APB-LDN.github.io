@@ -246,6 +246,69 @@
    </footer>
 
 <script>
+  async function loadBlogPosts() {
+    const CACHE_KEY = 'blogPosts';
+    const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const cachedData = JSON.parse(cached);
+      if (Date.now() - cachedData.updated < CACHE_TTL) {
+        return cachedData.posts;
+      }
+    }
+
+    const feeds = [
+      { url: 'https://feeds.feedburner.com/lawfareblog', tags: ['dc\:creator'], source: 'Lawfare' },
+      { url: 'https://feeds.cfr.org/cfr_main', tags: ['dc\:creator', 'creator', 'author'], source: 'CFR' }
+    ];
+
+    const posts = [];
+
+    for (const feed of feeds) {
+      try {
+        const fetchFeed = async url => {
+          try {
+            const r = await fetch(url);
+            if (r.ok) return await r.text();
+          } catch (err) {}
+          const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+          const pr = await fetch(proxy);
+          if (!pr.ok) throw new Error(`Proxy fetch failed for ${url}`);
+          return pr.text();
+        };
+
+        const text = await fetchFeed(feed.url);
+        const doc = new window.DOMParser().parseFromString(text, 'application/xml');
+        doc.querySelectorAll('item').forEach(item => {
+          const creator = feed.tags
+            .map(tag => item.querySelector(tag))
+            .find(Boolean);
+          if (!creator || !/laudrain/i.test(creator.textContent || '')) return;
+          const title = item.querySelector('title')?.textContent || 'Untitled';
+          const link = item.querySelector('link')?.textContent;
+          const pub = item.querySelector('pubDate')?.textContent;
+          if (link) {
+            posts.push({
+              title,
+              link,
+              year: pub ? new Date(pub).getFullYear() : '',
+              date: pub ? new Date(pub).getTime() : 0,
+              source: feed.source
+            });
+          }
+        });
+      } catch (e) {
+        console.error('Error loading feed', feed.url, e);
+      }
+    }
+
+    posts.sort((a, b) => b.date - a.date);
+    const finalPosts = posts.slice(0, 5);
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ updated: Date.now(), posts: finalPosts }));
+    return finalPosts;
+  }
+
   async function loadOpenAlex() {
     const container = document.getElementById('openalex-profile');
     if (!container) return;
@@ -283,7 +346,7 @@
       <li class="mb-4">
         <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-lg text-indigo-700 hover:underline">${w.title}</a>
         <div class="text-sm text-gray-600">
-          ${w.year ? w.year : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}
+          ${w.year ? w.year : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}${w.source ? ` · ${w.source}` : ''}
         </div>
       </li>
     `).join('');
@@ -293,10 +356,12 @@
       html += '<div class="mb-4">';
       html += '<button class="openalex-tab px-4 py-2 bg-indigo-200 text-indigo-700 rounded-t" data-tab="recent">Recent</button>';
       html += '<button class="openalex-tab px-4 py-2 bg-gray-100 text-indigo-700 rounded-t ml-2" data-tab="top">Top Cited</button>';
+      html += '<button class="openalex-tab px-4 py-2 bg-gray-100 text-indigo-700 rounded-t ml-2" data-tab="blog">Blog Posts</button>';
       html += '</div>';
       html += `<ul class="text-left max-w-3xl mx-auto mb-6" data-content="recent">${renderList(data.recent)}</ul>`;
       html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="top">${renderList(data.top)}</ul>`;
-      html += `<p class="text-sm text-gray-500 mt-6">Source: <a href="https://openalex.org/" target="_blank" rel="noopener noreferrer" class="underline text-indigo-700">OpenAlex</a> · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the source.</em><br>This publication widget is an experimental module (WIP)</p>`;
+      html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="blog">${renderList(data.blog)}</ul>`;
+      html += `<p class="text-sm text-gray-500 mt-6">Sources: <a href="https://openalex.org/" target="_blank" rel="noopener noreferrer" class="underline text-indigo-700">OpenAlex</a>, Lawfare RSS, CFR RSS · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the sources.</em><br>This publication widget is an experimental module (WIP)</p>`;
       container.innerHTML = html;
 
       const tabs = container.querySelectorAll('.openalex-tab');
@@ -320,14 +385,12 @@
       if (cached) {
         const cachedData = JSON.parse(cached);
         if (Date.now() - cachedData.updated < CACHE_TTL) {
+          cachedData.blog = await loadBlogPosts();
           render(cachedData);
           return;
         }
       }
 
-      const authorRes = await fetch(`${base}/authors/${authorId}?${mailto}`);
-      if (!authorRes.ok) throw new Error(`Author request failed with status ${authorRes.status}`);
-      const author = await authorRes.json();
 
       const recentRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=publication_date:desc&per-page=15&${mailto}`);
       if (!recentRes.ok) throw new Error(`Recent works request failed with status ${recentRes.status}`);
@@ -336,6 +399,23 @@
       const topRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=cited_by_count:desc&per-page=15&${mailto}`);
       if (!topRes.ok) throw new Error(`Top works request failed with status ${topRes.status}`);
       const top = await topRes.json();
+
+      const totals = async () => {
+        let page = 1;
+        let totalCites = 0;
+        let totalPubs = 0;
+        while (true) {
+          const res = await fetch(`${base}/works?filter=author.id:${authorId}&per-page=200&page=${page}&select=id,cited_by_count&${mailto}`);
+          if (!res.ok) break;
+          const data = await res.json();
+          totalPubs = data.meta.count;
+          totalCites += data.results.reduce((s, w) => s + (w.cited_by_count || 0), 0);
+          if (page * data.meta.per_page >= data.meta.count) break;
+          page++;
+        }
+        return { totalPubs, totalCites };
+      };
+      const { totalPubs, totalCites } = await totals();
 
       const mapWork = w => {
         if (!w.doi && !w.id) return null;
@@ -349,14 +429,16 @@
       };
 
       const recentWorks = filterWorks(recent.results.map(mapWork)).slice(0, 5);
-      const recentKeys = new Set(recentWorks.map(w => w.doi || w.link));
-      const topWorks = filterWorks(top.results.map(mapWork).filter(w => !recentKeys.has(w.doi || w.link))).slice(0, 5);
+      const topWorks = filterWorks(top.results.map(mapWork)).slice(0, 5);
+
+      const blogPosts = await loadBlogPosts();
 
       const data = {
-        publications: author.works_count,
-        citations: author.cited_by_count,
+        publications: totalPubs,
+        citations: totalCites,
         recent: recentWorks,
         top: topWorks,
+        blog: blogPosts,
         updated: Date.now()
       };
 
