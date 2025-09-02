@@ -246,6 +246,58 @@
    </footer>
 
 <script>
+  async function loadBlogPosts() {
+    const CACHE_KEY = 'blogPosts';
+    const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const cachedData = JSON.parse(cached);
+      if (Date.now() - cachedData.updated < CACHE_TTL) {
+        return cachedData.posts;
+      }
+    }
+
+    const feeds = [
+      { url: 'https://feeds.feedburner.com/lawfareblog', tag: 'dc\:creator', source: 'Lawfare' },
+      { url: 'https://www.cfr.org/rss', tag: 'creator', source: 'CFR' }
+    ];
+
+    const posts = [];
+
+    for (const feed of feeds) {
+      try {
+        const res = await fetch(feed.url);
+        if (!res.ok) continue;
+        const text = await res.text();
+        const doc = new window.DOMParser().parseFromString(text, 'application/xml');
+        doc.querySelectorAll('item').forEach(item => {
+          const creator = item.querySelector(feed.tag);
+          if (!creator || !/laudrain/i.test(creator.textContent || '')) return;
+          const title = item.querySelector('title')?.textContent || 'Untitled';
+          const link = item.querySelector('link')?.textContent;
+          const pub = item.querySelector('pubDate')?.textContent;
+          if (link) {
+            posts.push({
+              title,
+              link,
+              year: pub ? new Date(pub).getFullYear() : '',
+              date: pub ? new Date(pub).getTime() : 0,
+              source: feed.source
+            });
+          }
+        });
+      } catch (e) {
+        console.error('Error loading feed', feed.url, e);
+      }
+    }
+
+    posts.sort((a, b) => b.date - a.date);
+    const finalPosts = posts.slice(0, 5);
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ updated: Date.now(), posts: finalPosts }));
+    return finalPosts;
+  }
+
   async function loadOpenAlex() {
     const container = document.getElementById('openalex-profile');
     if (!container) return;
@@ -283,7 +335,7 @@
       <li class="mb-4">
         <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-lg text-indigo-700 hover:underline">${w.title}</a>
         <div class="text-sm text-gray-600">
-          ${w.year ? w.year : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}
+          ${w.year ? w.year : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}${w.source ? ` · ${w.source}` : ''}
         </div>
       </li>
     `).join('');
@@ -293,10 +345,12 @@
       html += '<div class="mb-4">';
       html += '<button class="openalex-tab px-4 py-2 bg-indigo-200 text-indigo-700 rounded-t" data-tab="recent">Recent</button>';
       html += '<button class="openalex-tab px-4 py-2 bg-gray-100 text-indigo-700 rounded-t ml-2" data-tab="top">Top Cited</button>';
+      html += '<button class="openalex-tab px-4 py-2 bg-gray-100 text-indigo-700 rounded-t ml-2" data-tab="blog">Blog Posts</button>';
       html += '</div>';
       html += `<ul class="text-left max-w-3xl mx-auto mb-6" data-content="recent">${renderList(data.recent)}</ul>`;
       html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="top">${renderList(data.top)}</ul>`;
-      html += `<p class="text-sm text-gray-500 mt-6">Source: <a href="https://openalex.org/" target="_blank" rel="noopener noreferrer" class="underline text-indigo-700">OpenAlex</a> · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the source.</em><br>This publication widget is an experimental module (WIP)</p>`;
+      html += `<ul class="text-left max-w-3xl mx-auto mb-6 hidden" data-content="blog">${renderList(data.blog)}</ul>`;
+      html += `<p class="text-sm text-gray-500 mt-6">Sources: <a href="https://openalex.org/" target="_blank" rel="noopener noreferrer" class="underline text-indigo-700">OpenAlex</a>, Lawfare RSS, CFR RSS · Last updated: ${new Date(data.updated).toLocaleString()}<br><em>Not all publications may be covered by the sources.</em><br>This publication widget is an experimental module (WIP)</p>`;
       container.innerHTML = html;
 
       const tabs = container.querySelectorAll('.openalex-tab');
@@ -320,6 +374,7 @@
       if (cached) {
         const cachedData = JSON.parse(cached);
         if (Date.now() - cachedData.updated < CACHE_TTL) {
+          cachedData.blog = await loadBlogPosts();
           render(cachedData);
           return;
         }
@@ -352,11 +407,14 @@
       const recentKeys = new Set(recentWorks.map(w => w.doi || w.link));
       const topWorks = filterWorks(top.results.map(mapWork).filter(w => !recentKeys.has(w.doi || w.link))).slice(0, 5);
 
+      const blogPosts = await loadBlogPosts();
+
       const data = {
         publications: author.works_count,
         citations: author.cited_by_count,
         recent: recentWorks,
         top: topWorks,
+        blog: blogPosts,
         updated: Date.now()
       };
 
