@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "manualUpdatedAt": "2025-06-17T00:00:00.000Z",
+    "note": "Fallback list maintained manually to ensure peer-review activity is always displayed even when live feeds are unavailable."
+  },
+  "entries": [
+    {
+      "id": "journal-of-international-law-and-information-technology",
+      "name": "Journal of International Law and Information Technology",
+      "organization": "Oxford University Press",
+      "role": "Peer Reviewer",
+      "years": [2020, 2024],
+      "lastReviewed": 2024,
+      "url": "https://academic.oup.com/jilit",
+      "groupIds": ["journal-of-international-law-and-information-technology"],
+      "aliases": ["JILIT"]
+    },
+    {
+      "id": "journal-of-cyber-policy",
+      "name": "Journal of Cyber Policy",
+      "organization": "Routledge",
+      "role": "Peer Reviewer",
+      "years": [2022],
+      "lastReviewed": 2022,
+      "url": "https://www.tandfonline.com/journals/rcyb20",
+      "groupIds": ["journal-of-cyber-policy"]
+    },
+    {
+      "id": "global-studies-quarterly",
+      "name": "Global Studies Quarterly",
+      "organization": "Oxford University Press",
+      "role": "Peer Reviewer",
+      "years": [2022, 2023],
+      "lastReviewed": 2023,
+      "url": "https://academic.oup.com/isagsq",
+      "groupIds": ["global-studies-quarterly"]
+    },
+    {
+      "id": "defence-studies",
+      "name": "Defence Studies",
+      "organization": "Routledge",
+      "role": "Peer Reviewer",
+      "years": [2025],
+      "lastReviewed": 2025,
+      "url": "https://www.tandfonline.com/journals/fdst20",
+      "groupIds": ["defence-studies"]
+    }
+  ]
+}
