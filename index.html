@@ -441,7 +441,7 @@
 
     container.innerHTML = '<p>Loading publication data…</p>';
 
-    const authorId = 'a5101299489';
+    const authorId = 'A5101299489';
     const base = 'https://api.openalex.org';
     const mailto = 'mailto=contact@apb-ldn.org';
     const CACHE_KEY = 'openAlexData';
@@ -525,11 +525,11 @@
       }
 
 
-      const recentRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=publication_date:desc&per-page=15&${mailto}`);
+      const recentRes = await fetch(`${base}/works?filter=authorships.author.id:${authorId}&sort=publication_date:desc&per-page=15&${mailto}`);
       if (!recentRes.ok) throw new Error(`Recent works request failed with status ${recentRes.status}`);
       const recent = await recentRes.json();
 
-      const topRes = await fetch(`${base}/works?filter=author.id:${authorId}&sort=cited_by_count:desc&per-page=15&${mailto}`);
+      const topRes = await fetch(`${base}/works?filter=authorships.author.id:${authorId}&sort=cited_by_count:desc&per-page=15&${mailto}`);
       if (!topRes.ok) throw new Error(`Top works request failed with status ${topRes.status}`);
       const top = await topRes.json();
 
@@ -538,7 +538,7 @@
         let totalCites = 0;
         let totalPubs = 0;
         while (true) {
-          const res = await fetch(`${base}/works?filter=author.id:${authorId}&per-page=200&page=${page}&select=id,cited_by_count&${mailto}`);
+          const res = await fetch(`${base}/works?filter=authorships.author.id:${authorId}&per-page=200&page=${page}&select=id,cited_by_count&${mailto}`);
           if (!res.ok) break;
           const data = await res.json();
           totalPubs = data.meta.count;
