@@ -24,11 +24,40 @@
     body{font-family:'Inter',sans-serif}
     .profile-image-wrapper{width:13rem;height:13rem;border-radius:9999px;overflow:hidden}
     .profile-image{width:100%;height:100%;object-fit:cover;border-radius:9999px;display:block;clip-path:circle(50% at 50% 50%)}
+    html{scroll-behavior:smooth;scroll-padding-top:3.5rem}
+    .nav-link.active{color:#4338ca;font-weight:600}
   </style>
 </head>
 <body class="text-gray-800">
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-indigo-700 focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to content</a>
+
+<nav id="site-nav" class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+    <a href="#" class="font-semibold text-indigo-700 text-sm truncate max-w-xs">Dr Arthur P.B. Laudrain</a>
+    <button id="nav-toggle" class="md:hidden p-2 rounded text-gray-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-mobile">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <ul class="hidden md:flex items-center gap-6 text-sm font-medium" role="list">
+      <li><a href="#expertise" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">Expertise</a></li>
+      <li><a href="#news" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">News</a></li>
+      <li><a href="#articles" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">Articles</a></li>
+      <li><a href="#publications" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">Publications</a></li>
+      <li><a href="#service" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">Academic Service</a></li>
+      <li><a href="#contact" class="nav-link text-gray-600 hover:text-indigo-700 transition-colors">Contact</a></li>
+    </ul>
+  </div>
+  <div id="nav-mobile" class="hidden border-t border-gray-100">
+    <ul class="flex flex-col px-4 py-2 text-sm font-medium" role="list">
+      <li><a href="#expertise" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">Expertise</a></li>
+      <li><a href="#news" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">News</a></li>
+      <li><a href="#articles" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">Articles</a></li>
+      <li><a href="#publications" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">Publications</a></li>
+      <li><a href="#service" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">Academic Service</a></li>
+      <li><a href="#contact" class="nav-link block py-2 text-gray-600 hover:text-indigo-700">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
 <header class="bg-indigo-600 text-white">
   <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center">
@@ -47,7 +76,7 @@
 
 <main id="main-content">
   <!-- Expertise -->
-  <section class="py-12 bg-gray-50">
+  <section id="expertise" class="py-12 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-8 text-indigo-700">Expertise</h2>
       <div class="grid gap-8 md:grid-cols-3">
@@ -71,7 +100,7 @@
   </section>
 
   <!-- Latest News -->
-  <section class="py-12">
+  <section id="news" class="py-12">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-8 text-indigo-700">Latest news</h2>
       <div class="my-8">
@@ -120,7 +149,7 @@
   </section>
 
   <!-- Media Engagement -->
-  <section class="py-12 bg-gray-50">
+  <section id="media" class="py-12 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold text-indigo-700 mb-8">Media engagement</h2>
       <a href="https://www.politics.ox.ac.uk/person/arthur-pb-laudrain" target="_blank" rel="noopener noreferrer">
@@ -130,7 +159,7 @@
   </section>
 
   <!-- Latest Articles -->
-  <section class="py-12">
+  <section id="articles" class="py-12">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Latest articles</h2>
       <div class="grid gap-8 md:grid-cols-4">
@@ -163,7 +192,7 @@
   </section>
 
   <!-- Research Programmes -->
-  <section class="py-12 bg-gray-50">
+  <section id="research" class="py-12 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Research programmes</h2>
       <div class="grid gap-8 md:grid-cols-2">
@@ -202,7 +231,7 @@
   </section>
 
     <!-- Publications -->
-    <section class="py-12">
+    <section id="publications" class="py-12">
       <div class="max-w-7xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Publications</h2>
         <p class="text-center mb-8">
@@ -215,7 +244,7 @@
   </section>
 
   <!-- Academic Service -->
-  <section class="py-12">
+  <section id="service" class="py-12">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Academic Service</h2>
       <div class="space-y-4">
@@ -312,7 +341,7 @@
   </section>
 </main>
 
-<footer class="bg-indigo-700 text-white">
+<footer id="contact" class="bg-indigo-700 text-white">
   <div class="max-w-7xl mx-auto px-4 py-12">
     <div class="grid md:grid-cols-3 gap-8">
       <div>
@@ -595,6 +624,49 @@
   }
 
   document.addEventListener('DOMContentLoaded', loadOpenAlex);
+
+  // Navigation hamburger toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  if (navToggle && navMobile) {
+    navToggle.addEventListener('click', () => {
+      const nowHidden = navMobile.classList.toggle('hidden');
+      navToggle.setAttribute('aria-expanded', !nowHidden);
+      navToggle.setAttribute('aria-label', nowHidden ? 'Open navigation' : 'Close navigation');
+    });
+    navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navMobile.classList.add('hidden');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation');
+    }));
+  }
+
+  // Back to top button
+  const btt = document.getElementById('back-to-top');
+  if (btt) {
+    window.addEventListener('scroll', () => btt.classList.toggle('hidden', window.scrollY < 400), { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  // Active nav link via IntersectionObserver
+  const navSections = document.querySelectorAll('section[id], footer[id]');
+  const allNavLinks = document.querySelectorAll('.nav-link');
+  if (navSections.length && allNavLinks.length) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        allNavLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    navSections.forEach(s => io.observe(s));
+  }
   </script>
+
+<button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 z-50 hidden p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
   </body>
   </html>
