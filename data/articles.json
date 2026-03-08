@@ -1,0 +1,56 @@
+[
+  {
+    "title": "[Chapter title — update me]",
+    "source": "Palgrave Macmillan",
+    "type": "book-chapter",
+    "date": "2026-02-20",
+    "description": "Book chapter in The Changing Fights and Fighters of Contemporary War: From the Margins to the Middle, eds. Robin, Theussen & Carlson.",
+    "link": "https://link.springer.com/chapter/10.1007/978-3-032-05518-7_5",
+    "image": null
+  },
+  {
+    "title": "Interpreting India's Cyber Statecraft",
+    "source": "Carnegie Endowment for International Peace",
+    "type": "report",
+    "date": "2025-03-27",
+    "description": "With Joe Devanny. India's cyber policies emerge from a domestic political context that shapes its cyber diplomacy and wider approach to cyber statecraft.",
+    "link": "https://carnegieendowment.org/research/2025/03/interpreting-indias-cyber-statecraft?lang=en",
+    "image": "assets/images/screenshot-2025-03-31-at-15.36.58.png-491x339.png"
+  },
+  {
+    "title": "Objectifs rationnels, enjeux bureaucratiques et arbitrages politiques : un examen du modèle français de cyberpolitique",
+    "source": "Études françaises de renseignement et de cyber",
+    "type": "article",
+    "date": "2024-01-01",
+    "description": "Examination of the French cyber policy model through the lens of rational objectives, bureaucratic stakes, and political trade-offs.",
+    "link": "https://doi.org/10.3917/efrc.243.0234",
+    "image": "assets/images/screenshot-2025-04-14-at-10.10.53.png-491x252.png"
+  },
+  {
+    "title": "Russia's Cyber War: What's Next and What the European Union Should Do",
+    "source": "Council on Foreign Relations",
+    "type": "article",
+    "date": "2022-04-01",
+    "description": "Assessment of Russia's cyber operations in the context of the Ukraine war and recommendations for European Union policy responses.",
+    "link": "https://www.cfr.org/blog/russias-cyber-war-whats-next-and-what-european-union-should-do",
+    "image": null
+  },
+  {
+    "title": "Mapping the Known Unknowns of Cybersecurity Education",
+    "source": "Council on Foreign Relations",
+    "type": "article",
+    "date": "2020-02-03",
+    "description": "With Trey Herr and Max Smeets. A review of syllabi on cyber conflict and security across higher education institutions.",
+    "link": "https://www.cfr.org/blog/mapping-known-unknowns-cybersecurity-education",
+    "image": "assets/images/screenshot-2020-02-18-at-14.23.43-332x208.png"
+  },
+  {
+    "title": "France's Strategic Autonomy Takes to Space",
+    "source": "IISS Military Balance Blog",
+    "type": "article",
+    "date": "2019-08-01",
+    "description": "Analysis of France's new space strategy and its implications for European strategic autonomy.",
+    "link": "https://www.iiss.org/blogs/military-balance/2019/08/france-space-strategy",
+    "image": "assets/images/screenshot-2020-02-18-at-14.24.05-304x210.png"
+  }
+]
