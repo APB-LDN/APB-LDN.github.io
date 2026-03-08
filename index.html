@@ -111,43 +111,23 @@
 
   <!-- Media Engagement -->
   <section id="media" class="py-12 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-indigo-700 mb-8">Media engagement</h2>
-      <a href="https://www.politics.ox.ac.uk/person/arthur-pb-laudrain" target="_blank" rel="noopener noreferrer">
-        <img loading="lazy" src="assets/images/screenshot-2025-01-20-at-17.56.10-1492x1760.png" alt="Media engagement" class="mx-auto rounded shadow w-full max-w-sm h-auto">
-      </a>
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-indigo-700 mb-8 text-center">Media engagement</h2>
+      <div id="media-list" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <p class="text-center text-gray-500 col-span-3">Loading…</p>
+      </div>
+      <p class="mt-6 text-center text-sm">
+        <a href="https://www.politics.ox.ac.uk/person/arthur-pb-laudrain" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">See full media profile →</a>
+      </p>
     </div>
   </section>
 
   <!-- Latest Articles -->
   <section id="articles" class="py-12">
     <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Latest articles</h2>
-      <div class="grid gap-8 md:grid-cols-4">
-        <div class="bg-white rounded shadow overflow-hidden">
-          <a href="https://carnegieendowment.org/research/2025/03/interpreting-indias-cyber-statecraft?lang=en" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="assets/images/screenshot-2025-03-31-at-15.36.58.png-491x339.png" alt="Interpreting India's Cyber Statecraft" class="w-full"></a>
-          <div class="p-4">
-            <h3 class="text-sm font-semibold">Interpreting India's Cyber Statecraft</h3>
-          </div>
-        </div>
-        <div class="bg-white rounded shadow overflow-hidden">
-          <a href="https://doi.org/10.3917/efrc.243.0234" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="assets/images/screenshot-2025-04-14-at-10.10.53.png-491x252.png" alt="Objectifs rationnels, enjeux bureaucratiques et arbitrages politiques : un examen du modèle français de cyberpolitique" class="w-full"></a>
-          <div class="p-4">
-            <h3 class="text-sm font-semibold">Objectifs rationnels, enjeux bureaucratiques et arbitrages politiques : un examen du modèle français de cyberpolitique</h3>
-          </div>
-        </div>
-        <div class="bg-white rounded shadow overflow-hidden">
-          <a href="https://www.cfr.org/blog/mapping-known-unknowns-cybersecurity-education" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="assets/images/screenshot-2020-02-18-at-14.23.43-332x208.png" alt="Mapping the Known Unknowns of Cybersecurity Education" class="w-full"></a>
-          <div class="p-4">
-            <h3 class="text-sm font-semibold">Mapping the Known Unknowns of Cybersecurity Education</h3>
-          </div>
-        </div>
-        <div class="bg-white rounded shadow overflow-hidden">
-          <a href="https://www.iiss.org/blogs/military-balance/2019/08/france-space-strategy" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="assets/images/screenshot-2020-02-18-at-14.24.05-304x210.png" alt="France's Strategic Autonomy Takes to Space" class="w-full"></a>
-          <div class="p-4">
-            <h3 class="text-sm font-semibold">France's Strategic Autonomy Takes to Space</h3>
-          </div>
-        </div>
+      <h2 class="text-3xl font-bold text-center text-indigo-700 mb-8">Latest articles &amp; policy pieces</h2>
+      <div id="articles-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <p class="text-center text-gray-500 col-span-3">Loading…</p>
       </div>
     </div>
   </section>
@@ -468,11 +448,14 @@
     };
 
     const renderList = works => works.map(w => `
-      <li class="mb-4">
-        <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-lg text-indigo-700 hover:underline">${w.title}</a>
-        <div class="text-sm text-gray-600">
-          ${w.year ? w.year : ''}${w.source ? ` · ${w.source}` : ''}${w.doi ? ` · <a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline">${w.doi}</a>` : ''}${w.citations ? ` · Citations: ${w.citations}` : ''}
+      <li class="pb-4 mb-0 border-b border-gray-100 last:border-0">
+        <div class="flex items-center gap-2 mb-1 flex-wrap">
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700">Publication</span>
+          ${w.year ? `<time class="text-xs text-gray-400">${w.year}</time>` : ''}
+          ${w.source ? `<span class="text-xs text-gray-500">${w.source}</span>` : ''}
         </div>
+        <a href="${w.link}" target="_blank" rel="noopener noreferrer" class="text-base font-medium text-indigo-700 hover:underline leading-snug">${w.title}</a>
+        ${(w.doi || w.citations) ? `<div class="text-xs text-gray-400 mt-0.5">${w.doi ? `<a href="https://doi.org/${w.doi}" target="_blank" rel="noopener noreferrer" class="hover:underline">${w.doi}</a>` : ''}${w.doi && w.citations ? ' · ' : ''}${w.citations ? `${w.citations} citation${w.citations !== 1 ? 's' : ''}` : ''}</div>` : ''}
       </li>
     `).join('');
 
@@ -586,14 +569,46 @@
 
   document.addEventListener('DOMContentLoaded', loadOpenAlex);
 
-  // News section — rendered from data/news.json
-  const TYPE_LABELS = { publication: 'Publication', media: 'Media', conference: 'Conference', article: 'Article' };
-  const TYPE_COLORS = {
-    publication: 'bg-indigo-100 text-indigo-700',
-    media:       'bg-green-100 text-green-700',
-    conference:  'bg-amber-100 text-amber-700',
-    article:     'bg-sky-100 text-sky-700',
+  // Shared label/colour maps (news, media, articles sections)
+  const TYPE_LABELS = {
+    publication:  'Publication',
+    media:        'Media',
+    conference:   'Conference',
+    article:      'Article',
+    quote:        'Quote',
+    interview:    'Interview',
+    panel:        'Panel',
+    radio:        'Radio',
+    feature:      'Feature',
+    report:       'Report',
+    'book-chapter': 'Book Chapter',
   };
+  const TYPE_COLORS = {
+    publication:  'bg-indigo-100 text-indigo-700',
+    media:        'bg-green-100 text-green-700',
+    conference:   'bg-amber-100 text-amber-700',
+    article:      'bg-sky-100 text-sky-700',
+    quote:        'bg-slate-100 text-slate-700',
+    interview:    'bg-violet-100 text-violet-700',
+    panel:        'bg-amber-100 text-amber-700',
+    radio:        'bg-rose-100 text-rose-700',
+    feature:      'bg-green-100 text-green-700',
+    report:       'bg-indigo-100 text-indigo-700',
+    'book-chapter': 'bg-violet-100 text-violet-700',
+  };
+
+  function makeBadge(type) {
+    const cls = TYPE_COLORS[type] || 'bg-gray-100 text-gray-700';
+    const label = TYPE_LABELS[type] || type;
+    return `<span class="text-xs font-semibold px-2 py-0.5 rounded-full ${cls}">${label}</span>`;
+  }
+
+  function fmtDate(dateStr, opts) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr; // e.g. "2023" — return as-is
+    return d.toLocaleDateString('en-GB', opts || { year: 'numeric', month: 'long', day: 'numeric' });
+  }
 
   async function loadNews() {
     const container = document.getElementById('news-list');
@@ -604,9 +619,7 @@
       const items = await res.json();
       items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       container.innerHTML = items.map(item => {
-        const badgeClass = TYPE_COLORS[item.type] || 'bg-gray-100 text-gray-700';
-        const label = TYPE_LABELS[item.type] || item.type;
-        const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+        const dateStr = fmtDate(item.date);
         const titleEl = item.link
           ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="font-semibold hover:underline hover:text-indigo-700">${item.title}</a>`
           : `<span class="font-semibold">${item.title}</span>`;
@@ -622,7 +635,7 @@
           : '';
         return `<div class="border-b border-gray-100 pb-8 last:border-0">
           <div class="flex items-center gap-3 mb-1 flex-wrap">
-            <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${badgeClass}">${label}</span>
+            ${makeBadge(item.type)}
             ${dateStr ? `<time datetime="${item.date}" class="text-xs text-gray-400">${dateStr}</time>` : ''}
           </div>
           <h3 class="text-base">${titleEl}</h3>
@@ -636,6 +649,75 @@
   }
 
   document.addEventListener('DOMContentLoaded', loadNews);
+
+  // Media section — rendered from data/media.json
+  async function loadMedia() {
+    const container = document.getElementById('media-list');
+    if (!container) return;
+    try {
+      const res = await fetch('data/media.json');
+      if (!res.ok) throw new Error('Failed to load media.json');
+      const items = await res.json();
+      items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      container.innerHTML = items.map(item => {
+        const dateStr = fmtDate(item.date, { year: 'numeric', month: 'short' });
+        const titleEl = item.link
+          ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm leading-snug hover:underline hover:text-indigo-700">${item.title}</a>`
+          : `<span class="font-semibold text-sm leading-snug">${item.title}</span>`;
+        const descEl = item.description ? `<p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.description}</p>` : '';
+        return `<div class="bg-white rounded shadow p-4 flex flex-col gap-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            ${makeBadge(item.type)}
+            ${dateStr ? `<time datetime="${item.date || ''}" class="text-xs text-gray-400">${dateStr}</time>` : ''}
+          </div>
+          <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide mt-1">${item.outlet}</p>
+          ${titleEl}
+          ${descEl}
+        </div>`;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '<p class="text-center text-red-500 col-span-3">Could not load media.</p>';
+      console.error(e);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadMedia);
+
+  // Articles section — rendered from data/articles.json
+  async function loadArticles() {
+    const container = document.getElementById('articles-list');
+    if (!container) return;
+    try {
+      const res = await fetch('data/articles.json');
+      if (!res.ok) throw new Error('Failed to load articles.json');
+      const items = await res.json();
+      items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      container.innerHTML = items.map(item => {
+        const dateStr = fmtDate(item.date, { year: 'numeric', month: 'short' });
+        const imgEl = item.image
+          ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${item.image}" alt="${item.title}" class="w-full h-40 object-cover"></a>`
+          : '';
+        const descEl = item.description ? `<p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.description}</p>` : '';
+        return `<div class="bg-white rounded shadow overflow-hidden flex flex-col">
+          ${imgEl}
+          <div class="p-4 flex flex-col flex-1 gap-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              ${makeBadge(item.type)}
+              ${dateStr ? `<time datetime="${item.date || ''}" class="text-xs text-gray-400">${dateStr}</time>` : ''}
+            </div>
+            <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">${item.source}</p>
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold leading-snug hover:underline hover:text-indigo-700 mt-0.5">${item.title}</a>
+            ${descEl}
+          </div>
+        </div>`;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '<p class="text-center text-red-500 col-span-3">Could not load articles.</p>';
+      console.error(e);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadArticles);
 
   // Navigation hamburger toggle
   const navToggle = document.getElementById('nav-toggle');

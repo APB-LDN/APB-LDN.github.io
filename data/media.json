@@ -1,0 +1,90 @@
+[
+  {
+    "outlet": "World Computer Day Davos",
+    "type": "panel",
+    "title": "The Invisible Battlefield: Data, AI & Global Influence",
+    "date": "2026-01-22",
+    "description": "Panel discussion exploring how data governance, AI capabilities, and cyber resilience shape geopolitical influence.",
+    "link": "https://www.youtube.com/watch?v=coj7tqm-KtE"
+  },
+  {
+    "outlet": "Al Jazeera",
+    "type": "quote",
+    "title": "Europe awakens to the threat of sabotage by Russian agents",
+    "date": "2023-01-17",
+    "description": "Expert commentary on Russian hybrid sabotage operations targeting critical infrastructure in France.",
+    "link": "https://www.aljazeera.com/news/2023/1/17/europe-awakens-to-the-threat-of-sabotage-by-russian-agents"
+  },
+  {
+    "outlet": "SRF – Regionaljournal Graubünden",
+    "type": "radio",
+    "title": "«Eine Grenze erreicht»: Die Gefahr von Desinformation durch Künstliche Intelligenz",
+    "date": null,
+    "description": "Radio interview on the dangers of AI-enabled disinformation and what awareness can achieve.",
+    "link": null
+  },
+  {
+    "outlet": "Morgenbladet",
+    "type": "quote",
+    "title": "Western trolling: Are fake online newspapers and fictitious profiles ok?",
+    "date": "2022-10-14",
+    "description": "Commentary on Western information operations and the ethics of fake online personas.",
+    "link": "https://www.morgenbladet.no/aktuelt/vestlig-trolling-er-falske-nettaviser-og-fiktive-profiler-ok/8880578"
+  },
+  {
+    "outlet": "Arte – Le dessous des images",
+    "type": "interview",
+    "title": "Otan : mettre en scène la puissance",
+    "date": "2023",
+    "description": "TV interview on NATO strategic communication and the staging of military power.",
+    "link": "https://www.arte.tv/fr/videos/127395-020-A/le-dessous-des-images/"
+  },
+  {
+    "outlet": "Data Center Dynamics",
+    "type": "quote",
+    "title": "Perpetrators & reasoning for April attack on Paris fiber cables still a mystery",
+    "date": "2022-08-02",
+    "description": "Expert comment on the ongoing investigation into coordinated sabotage of French internet infrastructure.",
+    "link": "https://www.datacenterdynamics.com/en/news/perpetrators-reasoning-for-april-attack-on-paris-fiber-cables-still-a-mystery/"
+  },
+  {
+    "outlet": "Index",
+    "type": "quote",
+    "title": "A mysterious attack hit Paris' main internet cables",
+    "date": "2022-07-30",
+    "description": "Analysis of the coordinated April 2022 sabotage of France's long-distance internet infrastructure.",
+    "link": "https://index.hu/techtud/2022/07/30/franciaorszag-internet-gerincvonal-parizs-vandalizmus-tamadas-digitalizacio-ellenes-rejtely/"
+  },
+  {
+    "outlet": "01net",
+    "type": "quote",
+    "title": "Sabotage of optical fibers in Paris: the identity of the perpetrators is still a mystery",
+    "date": "2022-07-27",
+    "description": "Expert commentary on the investigation into the April 2022 French fiber optic cable attacks.",
+    "link": "https://www.01net.com/actualites/sabotage-fibres-optiques-paris-identite-auteurs-toujours-mystere.html"
+  },
+  {
+    "outlet": "Wired",
+    "type": "quote",
+    "title": "The Unsolved Mystery Attack on Internet Cables in Paris",
+    "date": "2022-07-22",
+    "description": "Expert analysis of the coordinated attack on Paris internet cables and its broader security implications.",
+    "link": null
+  },
+  {
+    "outlet": "France Info",
+    "type": "quote",
+    "title": "Armements, logistique, cyberdéfense… Ce que la guerre en Ukraine nous apprend sur l'armée française",
+    "date": "2022-05-24",
+    "description": "Commentary on lessons from the Ukraine war for French military doctrine and cyber defence.",
+    "link": "https://www.francetvinfo.fr/monde/europe/manifestations-en-ukraine/armement-logistique-cyberdefense-ce-que-la-guerre-en-ukraine-nous-apprend-sur-l-armee-francaise_5120518.html"
+  },
+  {
+    "outlet": "BBC Science Focus",
+    "type": "feature",
+    "title": "5G and the Huawei Controversy: Is it About More Than Just Security?",
+    "date": "2020-02-21",
+    "description": "Featured expert explaining the geopolitical and security dimensions of the Huawei 5G controversy.",
+    "link": "https://www.sciencefocus.com/news/5g-and-the-huawei-controversy-is-it-about-more-than-just-security"
+  }
+]
