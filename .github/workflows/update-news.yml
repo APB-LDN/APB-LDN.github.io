@@ -1,37 +1,79 @@
-name: Auto-update news
+name: Bi-weekly content update
+
+# Runs on the 1st and 15th of every month at 07:00 UTC.
+# Also triggerable manually from the Actions tab ("Run workflow").
+#
+# What it does:
+#   1. Runs scripts/update_content.py to discover new publications,
+#      Lawfare articles, and media mentions (GDELT).
+#   2. If anything new is found, commits the updated JSON files to a
+#      dated branch and opens a pull request for review.
+#   3. If nothing is found, exits cleanly with no PR.
+#
+# You can then review and merge the PR on GitHub to publish the updates.
 
 on:
   schedule:
-    # Every Monday at 07:00 UTC
-    - cron: "0 7 * * 1"
-  workflow_dispatch: # allow manual trigger from Actions tab
+    - cron: "0 7 1,15 * *"   # 1st and 15th of each month at 07:00 UTC
+  workflow_dispatch:           # manual trigger from the Actions tab
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  update-news:
+  update-content:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Run news updater
-        run: python scripts/update_news.py
+      - name: Discover new content
+        run: python scripts/update_content.py
 
-      - name: Commit changes if any
+      # .update-summary.md is created only when new items were found.
+      # Use it as a signal to decide whether to open a PR.
+      - name: Check for changes
+        id: check
         run: |
+          if [ -f .update-summary.md ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit, and open PR
+        if: steps.check.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="update/content-${DATE}"
+
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/news.json
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "chore: auto-update news [skip ci]"
-            git push origin HEAD
-          fi
+
+          git checkout -b "${BRANCH}"
+
+          # Stage only the data files (never stage .update-summary.md)
+          git add data/news.json data/media.json data/articles.json
+          git commit -m "chore: bi-weekly content update ${DATE} [skip ci]"
+          git push origin "${BRANCH}"
+
+          gh pr create \
+            --title "Content update: ${DATE}" \
+            --body-file .update-summary.md \
+            --base main \
+            --head "${BRANCH}" \
+            --label "content-update" || \
+          gh pr create \
+            --title "Content update: ${DATE}" \
+            --body-file .update-summary.md \
+            --base main \
+            --head "${BRANCH}"
