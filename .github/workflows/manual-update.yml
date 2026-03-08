@@ -1,0 +1,191 @@
+name: Manual content update
+
+# Add a single item to the website from the GitHub UI — no git clone needed.
+#
+# How to use:
+#   1. Go to Actions → "Manual content update" → "Run workflow"
+#   2. Fill in the form fields below
+#   3. Click "Run workflow"
+#   4. A pull request will appear within ~1 minute — review and merge to publish
+#
+# Alternatively, edit data/queue.json directly and push; the bi-weekly
+# workflow will pick it up on its next run.
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      target:
+        description: "Where does this item go?"
+        required: true
+        type: choice
+        options:
+          - news       # Latest news section  (conferences, events, highlights)
+          - media      # Media engagement      (press quotes, TV, radio, podcasts)
+          - article    # Latest articles       (policy pieces, reports, book chapters)
+
+      title:
+        description: "Title (required)"
+        required: true
+        type: string
+
+      date:
+        description: "Date — YYYY-MM-DD (or YYYY-MM / YYYY if exact date unknown)"
+        required: false
+        type: string
+
+      type:
+        description: >
+          Item type. For news: conference / publication / article / media.
+          For media: quote / interview / panel / radio / feature.
+          For article: article / report / book-chapter.
+        required: false
+        type: string
+        default: ""
+
+      outlet_or_source:
+        description: >
+          For media: outlet name (e.g. BBC, Le Monde).
+          For article: source / publisher name (e.g. Carnegie Endowment).
+          Leave blank for news.
+        required: false
+        type: string
+
+      link:
+        description: "URL to the article, event page, or media clip (optional)"
+        required: false
+        type: string
+
+      description:
+        description: "Short plain-text description — 1 or 2 sentences (optional)"
+        required: false
+        type: string
+
+      image_url:
+        description: "Public URL of an image to download and attach (optional)"
+        required: false
+        type: string
+
+      embed_url:
+        description: "YouTube embed URL for news items with a video (optional, e.g. https://www.youtube.com/embed/abc123)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  add-item:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Append entry to queue.json
+        env:
+          TARGET:          ${{ inputs.target }}
+          TITLE:           ${{ inputs.title }}
+          DATE:            ${{ inputs.date }}
+          TYPE:            ${{ inputs.type }}
+          OUTLET_OR_SOURCE: ${{ inputs.outlet_or_source }}
+          LINK:            ${{ inputs.link }}
+          DESCRIPTION:     ${{ inputs.description }}
+          IMAGE_URL:       ${{ inputs.image_url }}
+          EMBED_URL:       ${{ inputs.embed_url }}
+        run: |
+          python - <<'PYEOF'
+          import json, os
+          from pathlib import Path
+
+          queue_file = Path("data/queue.json")
+          queue = json.loads(queue_file.read_text()) if queue_file.exists() else []
+
+          target = os.environ["TARGET"]
+          entry  = {
+              "target":      target,
+              "type":        os.environ.get("TYPE") or (
+                                 "conference" if target == "news"
+                                 else "quote" if target == "media"
+                                 else "article"),
+              "title":       os.environ["TITLE"],
+              "date":        os.environ.get("DATE") or "",
+              "description": os.environ.get("DESCRIPTION") or "",
+              "link":        os.environ.get("LINK") or None,
+              "image_url":   os.environ.get("IMAGE_URL") or None,
+          }
+
+          # Target-specific fields
+          oos = os.environ.get("OUTLET_OR_SOURCE") or ""
+          if target == "media":
+              entry["outlet"] = oos or "Unknown"
+          elif target == "article":
+              entry["source"] = oos or "Unknown"
+
+          embed = os.environ.get("EMBED_URL") or ""
+          if embed and target == "news":
+              entry["embed"] = embed
+
+          # Remove None values to keep the JSON clean
+          entry = {k: v for k, v in entry.items() if v not in (None, "")}
+
+          queue.append(entry)
+          queue_file.write_text(json.dumps(queue, indent=2, ensure_ascii=False) + "\n")
+          print(f"Queued: [{entry['target']}] {entry['title']}")
+          PYEOF
+
+      - name: Process queue (run update script with MANUAL_RUN=1)
+        env:
+          MANUAL_RUN: "1"
+        run: python scripts/update_content.py
+
+      - name: Check for changes
+        id: check
+        run: |
+          if [ -f .update-summary.md ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit, and open PR
+        if: steps.check.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TIME=$(date -u +%H%M)
+          BRANCH="manual/update-${DATE}-${TIME}"
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "${BRANCH}"
+
+          # Stage data files and any newly downloaded images
+          git add data/news.json data/media.json data/articles.json data/queue.json
+          git add assets/images/queue-* 2>/dev/null || true
+          git commit -m "content: manual update — ${{ inputs.title }} [skip ci]"
+          git push origin "${BRANCH}"
+
+          gh pr create \
+            --title "Manual update: ${{ inputs.title }}" \
+            --body-file .update-summary.md \
+            --base main \
+            --head "${BRANCH}" \
+            --label "content-update" 2>/dev/null || \
+          gh pr create \
+            --title "Manual update: ${{ inputs.title }}" \
+            --body-file .update-summary.md \
+            --base main \
+            --head "${BRANCH}"
+
+      - name: Nothing to add
+        if: steps.check.outputs.has_changes == 'false'
+        run: echo "Item was a duplicate of existing content — no PR created."
