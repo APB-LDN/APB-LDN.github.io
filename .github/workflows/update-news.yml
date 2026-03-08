@@ -62,7 +62,8 @@ jobs:
           git checkout -b "${BRANCH}"
 
           # Stage only the data files (never stage .update-summary.md)
-          git add data/news.json data/media.json data/articles.json
+          git add data/news.json data/media.json data/articles.json data/queue.json
+          git add assets/images/queue-* 2>/dev/null || true
           git commit -m "chore: bi-weekly content update ${DATE} [skip ci]"
           git push origin "${BRANCH}"
 
