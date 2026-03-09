@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160">
-  <rect width="400" height="160" fill="#d32f2f"/>
-  <text x="200" y="72" font-family="Arial Black, Arial, sans-serif" font-size="56" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle">Index</text>
-  <text x="200" y="118" font-family="Arial, sans-serif" font-size="16" fill="#ffcccc" text-anchor="middle" dominant-baseline="middle">index.hu — Hungarian news</text>
+  <rect width="400" height="160" fill="#FFFFFF"/>
+  <!-- "index" wordmark: black text, orange dot on the i -->
+  <!-- "i" letter -->
+  <text x="36" y="108" font-family="Arial Black,Arial,sans-serif" font-size="68" font-weight="900" fill="#1A1A1A" text-anchor="start">i</text>
+  <!-- orange dot replacing the i-dot -->
+  <circle cx="54" cy="44" r="9" fill="#F5A800"/>
+  <!-- "ndex" -->
+  <text x="72" y="108" font-family="Arial Black,Arial,sans-serif" font-size="68" font-weight="900" fill="#1A1A1A" text-anchor="start">ndex</text>
+  <!-- .hu badge -->
+  <text x="350" y="118" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#888888" text-anchor="end">.hu</text>
 </svg>

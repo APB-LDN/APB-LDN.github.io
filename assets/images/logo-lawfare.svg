@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120">
+  <rect width="320" height="120" fill="#FFFFFF"/>
+  <!-- Lawfare: real brand is teal/dark teal on white -->
+  <text x="160" y="58" font-family="Georgia,serif" font-size="40" font-weight="700" fill="#1D7874" text-anchor="middle" letter-spacing="4">LAWFARE</text>
+  <rect x="40" y="65" width="240" height="1.5" fill="#1D7874" opacity="0.4"/>
+  <text x="160" y="83" font-family="Georgia,serif" font-size="12" fill="#555555" text-anchor="middle" letter-spacing="0.5">Hard National Security Choices</text>
+</svg>

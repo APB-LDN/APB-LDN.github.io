@@ -569,6 +569,34 @@
 
   document.addEventListener('DOMContentLoaded', loadOpenAlex);
 
+  // Placeholder image for entries without an explicit image
+  function makePlaceholderEl(label, type, classes) {
+    const bgMap = {
+      publication:    '#4338ca',
+      conference:     '#b45309',
+      article:        '#0369a1',
+      quote:          '#475569',
+      interview:      '#7c3aed',
+      panel:          '#b45309',
+      radio:          '#be185d',
+      feature:        '#15803d',
+      report:         '#4338ca',
+      'book-chapter': '#7c3aed',
+      media:          '#15803d',
+    };
+    const bg = bgMap[type] || '#4338ca';
+    const initials = (label || '?')
+      .replace(/[^\w\s]/g, '')
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 3)
+      .map(w => w[0].toUpperCase())
+      .join('');
+    return `<div class="${classes} flex items-center justify-center" style="background:${bg};" aria-hidden="true">
+      <span style="color:rgba(255,255,255,0.55);font-family:Georgia,serif;font-size:2rem;font-weight:700;letter-spacing:-1px;">${initials}</span>
+    </div>`;
+  }
+
   // Shared label/colour maps (news, media, articles sections)
   const TYPE_LABELS = {
     publication:  'Publication',
@@ -626,7 +654,7 @@
         const descEl = item.description ? `<p class="mt-2 text-sm text-gray-700">${item.description}</p>` : '';
         const imageEl = item.image
           ? `<div class="mt-4"><a href="${item.link || '#'}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${item.image}" alt="${item.title}" class="rounded shadow w-full h-auto max-w-sm mx-auto"></a></div>`
-          : '';
+          : (!item.embed ? `<div class="mt-4 max-w-sm mx-auto rounded shadow overflow-hidden">${makePlaceholderEl(item.title || item.type, item.type, 'w-full h-36')}</div>` : '');
         const embedEl = item.embed
           ? `<div class="mt-4 relative" style="padding-top:56.25%;"><iframe class="absolute top-0 left-0 w-full h-full rounded shadow" loading="lazy" title="${item.embed_title || item.title}" src="${item.embed}" allowfullscreen></iframe></div>`
           : '';
@@ -665,7 +693,9 @@
           ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm leading-snug hover:underline hover:text-indigo-700">${item.title}</a>`
           : `<span class="font-semibold text-sm leading-snug">${item.title}</span>`;
         const descEl = item.description ? `<p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.description}</p>` : '';
-        const imgEl = item.image ? `<img loading="lazy" src="${item.image}" alt="${item.outlet}" class="w-full h-28 object-cover">` : '';
+        const imgEl = item.image
+          ? `<img loading="lazy" src="${item.image}" alt="${item.outlet}" class="w-full h-28 object-cover">`
+          : makePlaceholderEl(item.outlet, item.type, 'w-full h-28');
         return `<div class="bg-white rounded shadow overflow-hidden flex flex-col">
           ${imgEl}
           <div class="p-4 flex flex-col flex-1 gap-1">
@@ -700,7 +730,7 @@
         const dateStr = fmtDate(item.date, { year: 'numeric', month: 'short' });
         const imgEl = item.image
           ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${item.image}" alt="${item.title}" class="w-full h-40 object-cover"></a>`
-          : '';
+          : makePlaceholderEl(item.source, item.type, 'w-full h-40');
         const descEl = item.description ? `<p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.description}</p>` : '';
         return `<div class="bg-white rounded shadow overflow-hidden flex flex-col">
           ${imgEl}
