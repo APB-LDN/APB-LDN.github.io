@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120">
+  <rect width="320" height="120" fill="#003057"/>
+  <!-- Left accent column -->
+  <rect x="0" y="0" width="8" height="120" fill="#4A90A4"/>
+  <!-- IISS monogram -->
+  <text x="48" y="54" font-family="Arial,Helvetica,sans-serif" font-size="32" font-weight="900" fill="#4A90A4" text-anchor="middle">IISS</text>
+  <rect x="16" y="60" width="64" height="2" fill="#4A90A4" opacity="0.6"/>
+  <text x="48" y="78" font-family="Arial,Helvetica,sans-serif" font-size="7" fill="#8AB8C8" text-anchor="middle" letter-spacing="1">SINCE 1958</text>
+  <!-- Vertical separator -->
+  <rect x="92" y="20" width="1.5" height="80" fill="#4A90A4" opacity="0.4"/>
+  <!-- Name block -->
+  <text x="108" y="43" font-family="Arial,Helvetica,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="start" letter-spacing="0.8">INTERNATIONAL INSTITUTE</text>
+  <text x="108" y="60" font-family="Arial,Helvetica,sans-serif" font-size="12.5" font-weight="700" fill="#FFFFFF" text-anchor="start" letter-spacing="0.8">FOR STRATEGIC STUDIES</text>
+  <rect x="108" y="70" width="196" height="1.5" fill="#4A90A4" opacity="0.5"/>
+  <text x="108" y="84" font-family="Arial,Helvetica,sans-serif" font-size="9" fill="#7AACBD" text-anchor="start" letter-spacing="1.5">MILITARY BALANCE BLOG</text>
+</svg>
