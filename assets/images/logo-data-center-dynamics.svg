@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160">
+  <rect width="400" height="160" fill="#0d1b2a"/>
+  <text x="200" y="60" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#00cfff" text-anchor="middle" dominant-baseline="middle">Data Center</text>
+  <text x="200" y="100" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle">Dynamics</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160">
+  <rect width="400" height="160" fill="#2c3e50"/>
+  <text x="200" y="56" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Palgrave Macmillan</text>
+  <rect x="80" y="80" width="240" height="2" fill="#e8c560"/>
+  <text x="200" y="108" font-family="Georgia, serif" font-size="14" fill="#e8c560" text-anchor="middle" dominant-baseline="middle">Book Chapter · 2026</text>
+  <text x="200" y="136" font-family="Georgia, serif" font-size="11" fill="#aab8c2" text-anchor="middle" dominant-baseline="middle">Springer Nature</text>
+</svg>
