@@ -665,14 +665,18 @@
           ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm leading-snug hover:underline hover:text-indigo-700">${item.title}</a>`
           : `<span class="font-semibold text-sm leading-snug">${item.title}</span>`;
         const descEl = item.description ? `<p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.description}</p>` : '';
-        return `<div class="bg-white rounded shadow p-4 flex flex-col gap-1">
-          <div class="flex items-center gap-2 flex-wrap">
-            ${makeBadge(item.type)}
-            ${dateStr ? `<time datetime="${item.date || ''}" class="text-xs text-gray-400">${dateStr}</time>` : ''}
+        const imgEl = item.image ? `<img loading="lazy" src="${item.image}" alt="${item.outlet}" class="w-full h-28 object-cover">` : '';
+        return `<div class="bg-white rounded shadow overflow-hidden flex flex-col">
+          ${imgEl}
+          <div class="p-4 flex flex-col flex-1 gap-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              ${makeBadge(item.type)}
+              ${dateStr ? `<time datetime="${item.date || ''}" class="text-xs text-gray-400">${dateStr}</time>` : ''}
+            </div>
+            <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide mt-1">${item.outlet}</p>
+            ${titleEl}
+            ${descEl}
           </div>
-          <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide mt-1">${item.outlet}</p>
-          ${titleEl}
-          ${descEl}
         </div>`;
       }).join('');
     } catch (e) {

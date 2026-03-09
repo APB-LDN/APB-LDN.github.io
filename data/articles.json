@@ -1,12 +1,12 @@
 [
   {
-    "title": "[Chapter title — update me]",
+    "title": "The Middle-Ground Amidst Great (Cyber) Power Competition: From Pawns to Kingmakers?",
     "source": "Palgrave Macmillan",
     "type": "book-chapter",
     "date": "2026-02-20",
     "description": "Book chapter in The Changing Fights and Fighters of Contemporary War: From the Margins to the Middle, eds. Robin, Theussen & Carlson.",
     "link": "https://link.springer.com/chapter/10.1007/978-3-032-05518-7_5",
-    "image": null
+    "image": "assets/images/logo-palgrave.svg"
   },
   {
     "title": "Interpreting India's Cyber Statecraft",
@@ -33,7 +33,7 @@
     "date": "2022-04-01",
     "description": "Assessment of Russia's cyber operations in the context of the Ukraine war and recommendations for European Union policy responses.",
     "link": "https://www.cfr.org/blog/russias-cyber-war-whats-next-and-what-european-union-should-do",
-    "image": null
+    "image": "assets/images/logo-cfr.svg"
   },
   {
     "title": "Mapping the Known Unknowns of Cybersecurity Education",
