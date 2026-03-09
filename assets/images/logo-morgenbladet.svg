@@ -1,5 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160">
-  <rect width="400" height="160" fill="#1a2744"/>
-  <text x="200" y="72" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Morgenbladet</text>
-  <text x="200" y="112" font-family="Georgia, serif" font-size="14" fill="#a8b8d4" text-anchor="middle" dominant-baseline="middle">Norsk ukeavis siden 1819</text>
+  <rect width="400" height="160" fill="#F5F5F0"/>
+  <!-- M emblem -->
+  <text x="40" y="105" font-family="Georgia,'Times New Roman',serif" font-size="72" font-weight="900" fill="#1A1A1A" text-anchor="start">M</text>
+  <!-- Wordmark -->
+  <text x="108" y="82" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start" letter-spacing="2">MORGENBLADET</text>
+  <rect x="108" y="92" width="265" height="1" fill="#1A1A1A" opacity="0.3"/>
+  <text x="108" y="110" font-family="Georgia,serif" font-size="11" fill="#555555" text-anchor="start" letter-spacing="0.5">Norsk ukeavis siden 1819</text>
 </svg>

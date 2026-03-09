@@ -1,15 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="320" height="120">
-  <rect width="320" height="120" fill="#1A1A2E"/>
-  <!-- Top accent -->
-  <rect y="0" width="320" height="5" fill="#C0392B"/>
-  <!-- Scales of justice icon (simplified) -->
-  <line x1="44" y1="28" x2="44" y2="88" stroke="#C0392B" stroke-width="2"/>
-  <line x1="22" y1="38" x2="66" y2="38" stroke="#C0392B" stroke-width="2"/>
-  <path d="M22 38 L12 58 L32 58 Z" fill="none" stroke="#C0392B" stroke-width="1.5"/>
-  <path d="M66 38 L56 58 L76 58 Z" fill="none" stroke="#C0392B" stroke-width="1.5"/>
-  <rect x="36" y="88" width="16" height="4" fill="#C0392B" opacity="0.7"/>
-  <!-- Wordmark -->
-  <text x="98" y="54" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="start" letter-spacing="-0.5">Lawfare</text>
-  <rect x="98" y="62" width="188" height="1.5" fill="#C0392B" opacity="0.6"/>
-  <text x="98" y="78" font-family="Georgia,serif" font-size="9.5" fill="#9B9BB5" text-anchor="start" letter-spacing="0.8">Hard National Security Choices</text>
+  <rect width="320" height="120" fill="#FFFFFF"/>
+  <!-- Lawfare: real brand is teal/dark teal on white -->
+  <text x="160" y="58" font-family="Georgia,serif" font-size="40" font-weight="700" fill="#1D7874" text-anchor="middle" letter-spacing="4">LAWFARE</text>
+  <rect x="40" y="65" width="240" height="1.5" fill="#1D7874" opacity="0.4"/>
+  <text x="160" y="83" font-family="Georgia,serif" font-size="12" fill="#555555" text-anchor="middle" letter-spacing="0.5">Hard National Security Choices</text>
 </svg>

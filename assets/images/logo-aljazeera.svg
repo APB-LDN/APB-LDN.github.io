@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160">
-  <rect width="400" height="160" fill="#8b0000"/>
-  <text x="200" y="80" font-family="Georgia, serif" font-size="38" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Al Jazeera</text>
-  <text x="200" y="118" font-family="Georgia, serif" font-size="16" fill="#ffcccc" text-anchor="middle" dominant-baseline="middle">الجزيرة</text>
+  <rect width="400" height="160" fill="#1A1A1A"/>
+  <rect x="0" y="0" width="400" height="5" fill="#D4A017"/>
+  <text x="200" y="80" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="900" fill="#D4A017" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">AL JAZEERA</text>
+  <rect x="80" y="108" width="240" height="1.5" fill="#D4A017" opacity="0.5"/>
+  <text x="200" y="128" font-family="Arial,sans-serif" font-size="11" fill="#AAAAAA" text-anchor="middle" dominant-baseline="middle" letter-spacing="3">ENGLISH</text>
 </svg>
