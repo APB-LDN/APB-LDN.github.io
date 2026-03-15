@@ -59,6 +59,9 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Detect the actual default branch (avoids hardcoding "main")
+          DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+
           git checkout -b "${BRANCH}"
 
           # Stage only the data files (never stage .update-summary.md)
@@ -70,11 +73,5 @@ jobs:
           gh pr create \
             --title "Content update: ${DATE}" \
             --body-file .update-summary.md \
-            --base main \
-            --head "${BRANCH}" \
-            --label "content-update" || \
-          gh pr create \
-            --title "Content update: ${DATE}" \
-            --body-file .update-summary.md \
-            --base main \
+            --base "${DEFAULT_BRANCH}" \
             --head "${BRANCH}"
