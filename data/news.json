@@ -18,8 +18,14 @@
     "embed": "https://www.youtube.com/embed/q0swiUQXbjE?rel=0",
     "embed_title": "Cyber Statecraft Series",
     "extra_images": [
-      {"src": "assets/images/screenshot-2025-01-28-at-14.40.46-512x698.png", "alt": "Behind the scene"},
-      {"src": "assets/images/screenshot-2025-01-28-at-14.40.33-888x585.png", "alt": "Cyber Statecraft series"}
+      {
+        "src": "assets/images/screenshot-2025-01-28-at-14.40.46-512x698.png",
+        "alt": "Behind the scene"
+      },
+      {
+        "src": "assets/images/screenshot-2025-01-28-at-14.40.33-888x585.png",
+        "alt": "Cyber Statecraft series"
+      }
     ]
   },
   {
@@ -29,5 +35,145 @@
     "description": "I joined the fifth edition of the Santander-CIDOB Future Leaders Forum in Barcelona, in November 2024. European digital policy: where are we and where are we going? was the title of this edition, which consisted of a speed-debating dialogue session, a dynamic and interactive format. During the event, the young participants brought their reflections, ideas and political proposals in four key areas: the regulation of emerging technologies, the European Union's technological and innovation capacities, the fight against disinformation and European digital sovereignty in a context of geopolitical competition.",
     "link": "https://www.cidob.org/en/news/fifth-edition-santander-cidob-future-leaders-forum-brings-together-young-leaders-debate",
     "image": "assets/images/cidob2.png-641x359.png"
+  },
+  {
+    "type": "publication",
+    "title": "Study of Z→llγ\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$Z \\rightarrow ll\\gamma $$\\end{document} decays at s\\docu",
+    "date": "2023-10-17",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-024-12471-9"
+  },
+  {
+    "type": "publication",
+    "title": "Search for quantum black hole production in \n<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:mi>lepton</mml:mi><mml:mo>+</mml:mo><mml:mtext>jet</mml:mtext></mml:mrow></mml:math>\n final states using proton-proton collisions at \n<mml:math xmlns:mml=\"http://www.",
+    "date": "2023-07-27",
+    "description": "Academic publication in Physical Review D.",
+    "link": "https://doi.org/10.1103/PhysRevD.109.032010"
+  },
+  {
+    "type": "publication",
+    "title": "Search for dark matter produced in association with a dark Higgs boson decaying into W+W− in the one-lepton final state at $$ \\sqrt{s} $$ = 13 TeV using 139 fb−1 of pp collisions recorded with the ATLAS detector",
+    "date": "2023-07-13",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/jhep07(2023)116"
+  },
+  {
+    "type": "publication",
+    "title": "Search for leptoquark pair production decaying into $$te^- \\bar{t}e^+$$ or $$t\\mu ^- \\bar{t}\\mu ^+$$ in multi-lepton final states in pp collisions at $$\\sqrt{s} = 13\\,\\textrm{TeV}$$ with the ATLAS detector",
+    "date": "2023-06-30",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-024-12975-4"
+  },
+  {
+    "type": "publication",
+    "title": "Measurements of multijet event isotropies using optimal transport with the ATLAS detector",
+    "date": "2023-05-26",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP10(2023)060"
+  },
+  {
+    "type": "publication",
+    "title": "Measurement of the nuclear modification factor of b-jets in 5.02 TeV Pb+Pb collisions with the ATLAS detector",
+    "date": "2023-05-01",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11427-9"
+  },
+  {
+    "type": "publication",
+    "title": "Search for third-generation vector-like leptons in pp collisions at s\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69pt} \\begin{document}$$ ",
+    "date": "2023-03-09",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP07(2023)118"
+  },
+  {
+    "type": "publication",
+    "title": "Measurement of the charge asymmetry in top-quark pair production in association with a photon with the ATLAS experiment",
+    "date": "2022-12-20",
+    "description": "Academic publication in Physics Letters B.",
+    "link": "https://doi.org/10.1016/j.physletb.2023.137848"
+  },
+  {
+    "type": "publication",
+    "title": "Search for dark matter produced in association with a single top quark and an energetic W boson in \n              \n                \n              \n              $$\\sqrt{s}=$$\n              \n                \n                  \n                    s\n                  \n                  =\n             ",
+    "date": "2022-11-23",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11582-z"
+  },
+  {
+    "type": "publication",
+    "title": "Observation of gauge boson joint-polarisation states in W±Z production from pp collisions at <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.svg\"><mml:msqrt><mml:mrow><mml:mi>s</mml:mi></mml:mrow></mml:msqrt><mml:mo linebreak=\"goodbreak\" linebreakstyle=\"after\">=</mml:mo><mml:mn>",
+    "date": "2022-11-17",
+    "description": "Academic publication in Physics Letters B.",
+    "link": "https://doi.org/10.1016/j.physletb.2023.137895"
+  },
+  {
+    "type": "publication",
+    "title": "Search for supersymmetry in final states with missing transverse momentum and three or more b-jets in 139 fb\n              \n                \n              \n              $$^{-1}$$\n              \n                \n                  \n                  \n                    -\n                    1\n      ",
+    "date": "2022-11-15",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11543-6"
+  },
+  {
+    "type": "publication",
+    "title": "Search for doubly charged Higgs boson production in multi-lepton final states using 139 fb\n \n \n \n $$^{-1}$$\n \n \n \n \n -\n 1\n \n \n \n of proton–proton collisions at \n \n \n \n $$\\sqrt{s}$$\n \n \n s\n \n \n = 13 TeV with the ATLAS detector",
+    "date": "2022-11-14",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11578-9"
+  },
+  {
+    "type": "publication",
+    "title": "Deep Generative Models for Fast Photon Shower Simulation in ATLAS",
+    "date": "2022-10-12",
+    "description": "Academic publication in Computing and Software for Big Science.",
+    "link": "https://doi.org/10.1007/s41781-023-00106-9"
+  },
+  {
+    "type": "publication",
+    "title": "Search for Higgs boson pair production in association with a vector boson in pp collisions at \n \n \n \n $$\\sqrt{s}=13\\,\\text {TeV}$$\n \n \n \n s\n \n =\n 13\n \n TeV\n \n \n with the ATLAS detector",
+    "date": "2022-10-11",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11559-y"
+  },
+  {
+    "type": "publication",
+    "title": "Search for pair-produced scalar and vector leptoquarks decaying into third-generation quarks and first- or second-generation leptons in pp collisions with the ATLAS detector",
+    "date": "2022-10-10",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP06(2023)188"
+  },
+  {
+    "type": "publication",
+    "title": "A search for new resonances in multiple final states with a high transverse momentum Z boson in s\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin",
+    "date": "2022-09-30",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP06(2023)036"
+  },
+  {
+    "type": "publication",
+    "title": "Measurement of single top-quark production in the s-channel in proton–proton collisions at s\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlength{\\oddsidemargin}{-69",
+    "date": "2022-09-19",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP06(2023)191"
+  },
+  {
+    "type": "publication",
+    "title": "Searches for exclusive Higgs and Z boson decays into a vector quarkonium state and a photon using 139 fb\n              \n                \n              \n              $$^{-1}$$\n              \n                \n                  \n                  \n                    -\n                    1\n          ",
+    "date": "2022-08-05",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11869-1"
+  },
+  {
+    "type": "publication",
+    "title": "Search for new phenomena in final states with photons, jets and missing transverse momentum in pp collisions at s\\documentclass[12pt]{minimal} \\usepackage{amsmath} \\usepackage{wasysym} \\usepackage{amsfonts} \\usepackage{amssymb} \\usepackage{amsbsy} \\usepackage{mathrsfs} \\usepackage{upgreek} \\setlengt",
+    "date": "2022-06-13",
+    "description": "Academic publication in Journal of High Energy Physics.",
+    "link": "https://doi.org/10.1007/JHEP07(2023)021"
+  },
+  {
+    "type": "publication",
+    "title": "Searches for new phenomena in events with two leptons, jets, and missing transverse momentum in 139 fb\n              \n                \n              \n              $$^{-1}$$\n              \n                \n                  \n                  \n                    -\n                    1\n            ",
+    "date": "2022-04-27",
+    "description": "Academic publication in The European Physical Journal C.",
+    "link": "https://doi.org/10.1140/epjc/s10052-023-11434-w"
   }
 ]
